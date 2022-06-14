@@ -1,0 +1,337 @@
+\documentclass[10pt]{article}
+\usepackage{NotesTeXV3}
+\usepackage{orcidlink}
+\usepackage{tensor}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage[export]{adjustbox}
+\usepackage{docmute}
+\usepackage{chapterbib}
+
+\hbadness=99999
+
+\let\oldsection\section
+\def\section{%
+  \setcounter{sidenote}{1}%
+  \oldsection
+}
+
+\begin{document}
+\title{Scattering Amplitudes}
+\author{Shangjie Zhou\orcidlink{0000-0001-9576-5011}}
+\affiliation{School of Physics and Technology, Wuhan University}
+\emailAdd{sjzhou@whu.edu.cn}
+\abstract{\textit{Last updated on: \today}\\\url{https://github.com/spaceofzsj/notes}}
+
+\maketitle
+\section{Introduction}
+Scattering experiments are crucial for our understanding of the building blocks of nature.
+The standard model of particle physics was developed from scattering experiments, including the discovery of the weak force bosons $W^{\pm}$ and $Z^0$, quarks and gluons, and most recently the Higgs boson.
+
+The key observable measured in particle scattering experiments is the scattering cross-section $\sigma$.
+It encodes the likelihood of a given process to take place as a function of the energy and momentum of the particles involved.
+A more refined version of this quantity is the differential cross-section $\dd{\sigma}/\dd{\Omega}$: it describes the dependence of the cross-section on the angles of the scattered particles.
+
+Interpretation of data from scattering experiments relies heavily on theoretical predictions of scattering cross-sections.
+These are calculated in relativistic quantum field theory (QFT), which is the mathematical language for describing elementary particles and their interactions.
+Relativistic QFT combines special relativity with quantum physics and is a hugely successful and experimentally well-tested framework for describing elementary particles and the fundamental forces of nature.
+In quantum mechanics, the probability distribution $\abs{\psi}^2=\psi^* \psi$ for a particle is given by the norm-squared of its complex-valued wavefunction $\psi$.
+Analogously, in quantum field theory, the differential cross-section is proportional to the norm-squared of the scattering amplitude $A$, $\dd{\sigma}/\dd{\Omega}\propto\abs{A}^2$.
+The amplitudes A are well-defined physical observables.
+
+Each scattering process is characterized by the types of particles involved in the initial and final states as well as the relativistic momentum $\vec{p}$ and energy $E$ of each particle.
+This input is the external data for an amplitude: a scattering amplitude $A_n$ involving a total of $n$ initial and final state particles takes the list $\left\{E_i, \vec{p}_i; \text{type}_i\right\}, i=1,2,\dots,n$ of external data and returns a complex number:
+\begin{align}
+    n\text{-particle amplitude}\ A_n:\quad \left\{E_i, \vec{p}_i; \text{type}_i\right\}\rightarrow A_n\left(\left\{E_i, \vec{p}_i; \text{type}_i\right\}\right)\in\mathbb{C}.
+\end{align}
+“Particle type” involves more than saying which particles scatter: it also includes a specification of the appropriate quantum numbers of the initial and final states, for example the polarization of a photon or the spin-state of a fermion.
+
+This note follows \cite{Elvang:2015rqa}.
+
+There are also many books or reviews on this topic such as \cite{Adamo:2022dcm}\cite{Cheung:2017pzi}\cite{Henn:2014yza}\cite{Taylor:2017sph}.
+
+\clearpage
+\part{Trees}
+\section{Spinor Helicity Formalism}
+The spinor helicity formalism is a highly convenient and powerful notational tool for amplitudes of massless particles in 4-dimensional theories.
+There are many papers which are regarded as earliest developments of spinor helicity formalism.
+
+The Lagrangian for a free massive 4-component Dirac field $\psi$ is
+\begin{align}
+    \mathcal{L}=i\bar{\psi}(\slashed{\partial}-m)\psi.
+\end{align}
+The equation of motion gives Dirac equation
+\begin{align}\label{eq:dirac}
+    (-i\slashed{\partial}+m)\psi=0.
+\end{align}
+Multiplying the Dirac equation by $(i\slashed{\partial}+m)$ gives Klein-Gordon equation, $(-\partial^2+m^2)\psi=0$. It can be solved by a plane-wave expansion ansatz
+\begin{align}\label{s}
+    \psi(x)= u(p)e^{ip\cdot x}+v(p)e^{-ip\cdot x}.
+\end{align}
+Put \cref{s} in \cref{eq:dirac} and we have
+\begin{align}\label{diracmomentum}
+    (\slashed{p}+m)u(p)=0\qq{and}(-\slashed{p}+m)v(p)=0.
+\end{align}
+\Cref{diracmomentum} are called Dirac equation in momentum space.
+Each of the equations in \cref{diracmomentum} has two solutions which we will label by a subscript $s=\pm$.
+We can now write the general free field expansion of $\psi$ as
+\begin{align}
+    \psi(x)=\sum_{s=\pm}\int\widetilde{\dd p}\left[b_s(p) u_s(p)e^{ip\cdot x}+d^\dagger_s(p)v_s(p)e^{-ip\cdot x}\right],
+\end{align}
+where $\widetilde{\dd p}=\frac{\dd[3]{p}}{(2\pi)^3 2 E_p}$ is the 3d Lorentz-invariant momentum measure.
+
+In canonical quantization, $(b^\dagger_\pm(p),d^\dagger_\pm(p))$ and $(b_\pm(p),d_\pm(p))$ become fermionic creation and annihilation operators.
+The next step in canonical quantization is to define the vacuum $\ket{0}$ such that $b_{\pm}(0)\ket{0}=0$ and $d_{\pm}(p)\ket{0}=0$.
+One-particle states are then defined as $\ket{p;\pm}\equiv d^\dagger_{\pm}(p)\ket{0}$, etc.
+
+We write the 4-momentum $p^\mu$ of an on-shell particle as a matrix in spinor indices via
+\begin{align}
+    \slashed{p}=\mqty(0 & p_{a\dot{b}} \\p^{\dot{a}b}&0),
+\end{align}
+with
+\begin{align}
+    p_{a\dot{b}}\equiv p_\mu(\sigma^\mu)_{a\dot{b}}=\mqty(-p^0+p^3 & p^1-ip^2 \\p^1+ip^2&-p^0-p^3),
+\end{align}
+and similarly $p^{\dot{a}b}\equiv p_\mu\left(\bar{\sigma}^\mu\right)^{\dot{a}b}$,
+where $\sigma^{\mu}\equiv(1,\sigma^i)$ and $\bar{\sigma}^\mu\equiv(1,-\sigma^i)$.
+Then the on-shell condition now becomes
+\begin{align}\label{eq:detp}
+    \det p=-p^\mu p_\mu=m^2.
+\end{align}
+\begin{remark}
+    Under a Lorentz transformation $\Lambda$, we have $p^\mu\to \tensor{\Lambda}{^\mu_\nu}p^\nu$. Notice that in chiral representation
+    \begin{align}
+        \tensor{\Lambda}{^\mu_\nu}\gamma^\nu=S^{-1}_{\text{Dirac}}(\Lambda)\gamma^\mu S_{\text{Dirac}}(\Lambda)
+    \end{align}
+    and recall that
+    \begin{align}
+        S_{\text{Dirac}}(\Lambda)=\mqty(\Lambda_{(\frac{1}{2},0)} & 0 \\0&\Lambda_{(0,\frac{1}{2})})
+    \end{align}
+    $\slashed{p}$ transforms in the following way
+    \begin{align}
+        \slashed{p}=\mqty(0 & p_{a\dot{b}}                                                                                                                                      \\p^{\dot{a}b}&0)\to p_\beta \tensor{\Lambda}{^\beta_\mu}\gamma^\mu&=p_\beta S^{-1}_{\text{Dirac}}(\Lambda)\gamma^\beta S_{\text{Dirac}}(\Lambda)\notag\\
+                            & = S^{-1}_{\text{Dirac}}(\Lambda)\slashed{p} S_{\text{Dirac}}(\Lambda)\notag                                                                       \\
+                            & =\mqty(0                                                                    & \Lambda^{-1}_{(\frac{1}{2},0)}p_{a\dot{b}}\Lambda_{(0,\frac{1}{2})} \\\Lambda^{-1}_{(0,\frac{1}{2})}p^{\dot{a}b}\Lambda_{(\frac{1}{2},0)}&0).
+    \end{align}
+    So it is clear that the indices on $p$ are indeed spinor indices.
+\end{remark}
+
+
+When $m=0$, the Dirac equation in momentum space reads
+\begin{align}\label{massless}
+    \slashed{p}v_\pm(p)=0\qq{and}\bar{u}_\pm(p)\slashed{p}=0.
+\end{align}
+\textit{Crossing symmetry} exchanges (incoming $\leftrightarrow$ outcoming), (fermions $\leftrightarrow$ anti-fermions) and flips the sign of the helicity, so in the massless case the wavefunctions are related as $u_\pm=v_\mp$ and $\bar{v}_\pm=\bar{u}_\mp$.
+
+Moreover, \cref{eq:detp} now becomes
+\begin{align}
+    \det p=0,
+\end{align}
+which implies that $\text{rank of}\ p^{\dot{a}b}<2$ and we have $p^{\dot{a}b}=\tilde{\lambda}^{\dot{a}}\lambda^b$.
+The indices of $\tilde{\lambda}^{\dot{a}}$ and $\lambda^a$ are defined to be raised and lowered with the invariant Levi-Civita tensor\sidenote{$\lambda_a$ and $\tilde{\lambda}^{\dot{a}}$ are column vectors. $\tilde{\lambda}_{\dot{a}}$ and $\lambda^a$ are row vectors}:
+\begin{align}
+    \lambda_\alpha\equiv\epsilon_{\alpha\beta}\lambda^\beta\qq{and}\tilde{\lambda}_{\dot{\alpha}}\equiv\epsilon_{\dot{\alpha}\dot{\beta}}\tilde{\lambda}^{\dot{\beta}}.
+\end{align}
+It can be verified that \cref{massless} can be solved by
+\begin{align}
+    v_+(p)=\mqty(\lambda_a \\0)\equiv\mqty(|p]_a\\0)\qq{and}v_-(p)=\mqty(0\\\tilde{\lambda}^{\dot{a}})\equiv\mqty(0\\\ket{p}^{\dot{a}}),
+\end{align}
+and
+\begin{align}
+    \bar{u}_-(p)=\mqty(0 & \tilde{\lambda}_{\dot{a}})\equiv\mqty(0 & \bra{p}_{\dot{a}})\qq{and}\bar{u}_+(p)=\mqty(\lambda^a & 0)\equiv\mqty([p|^a & 0).
+\end{align}
+The angle and square spinors are the core of what we call the \textbf{spinor helicity formalism}.
+
+\paragraph{Reality conditions.}
+From the crossing symmetry $\bar{u}_\mp=\bar{v}_\pm$, if the momentum is real\sidenote{The crossing symmetry applies to real particles which have real momentum.}, we have
+\begin{align}
+    [p|^a=\left(\ket{p}^{\dot{a}}\right)^*\qq{and}\bra{p}_{\dot{a}}=\left(|p]_a\right)^*.
+\end{align}
+
+\paragraph{Spinor completeness relation.}
+The spin-sum completeness relation with $m=0$ which reads $u_-\bar{u}_-+u_+\bar{u}_+=-\slashed{p}$ now becomes
+\begin{align}
+    p_{a\dot{b}}=-|p]_a\bra{p}_{\dot{b}}\qq{and}p^{\dot{a}b}=-\ket{p}^{\dot{a}}[p|^b.
+\end{align}
+
+\lec{Feynman Rules}{Fermions}The Feynman rules of fermions can be conveniently expressed with spinor variables
+\begin{itemize}
+    \item Outgoing fermion with $h=+1/2$: $u_+(p)\leftrightarrow\mqty([p|^a&0)$;
+    \item Outgoing fermion with $h=-1/2$: $u_-(p)\leftrightarrow\mqty(0&\bra{p}_{\dot{a}})$;
+    \item Ingoing fermion with $h=+1/2$: $v_+(p)=\leftrightarrow\mqty(|p]_a\\0)$;
+    \item Ingoing fermion with $h=-1/2$: $v_-(p)=\leftrightarrow\mqty(0\\\ket{p}^{\dot{a}})$.
+\end{itemize}
+
+\clearpage
+
+\section{Yang-Mills Theory}
+Gluons are described by the Yang-Mills Lagrangian
+\begin{align}
+    \mathcal{L}=-\frac{1}{4}\Tr F_{\mu\nu}F^{\mu\nu},
+\end{align}
+with $F_{\mu\nu}=\partial_\mu A_\nu-\partial_{\mu}A_\mu-\frac{ig}{\sqrt{2}}\comm{A_\mu}{A_\nu}$ and $A_\mu=A^a_{\mu}T^a$.
+
+The gauge group $G=\text{SU}(3)$ for QCD, but we will keep the number of colors $N$ general and take $G=\text{SU}(N)$.
+The gluon fields are in the adjoint representation, so the color-indices run over $a,b,\dots=1,2,\dots,N^2-1$.
+The generators $T^a$ are normalized such that $\Tr T^a T^b=\delta^{ab}$ and $\comm{T^a}{T^b}=i\tilde{f}^{abc}T^{c}$.
+
+\lec{Feynman Rules}{Yang-Mills Theory}In \textit{Gervais-Neveu gauge} for which the gauge-fixing term is $\mathcal{L}_{gf}=-\frac{1}{2}\Tr\left(\tensor{H}{_\mu^\mu}\right)^2$ with $H_{\mu\nu}=\partial_\mu A_\nu-\frac{ig}{\sqrt{2}}A_\mu A_\nu$,
+the Lagrangian takes the form\sidenote{We ignore the ghosts here because only the tree-level amplitudes are considered.}
+\begin{align}
+    \mathcal{L}=\Tr(-\frac{1}{2}\partial_\mu A_\nu \partial^\mu A^\nu-i\sqrt{2}g\partial^\mu A^\nu A_\nu A_\mu+\frac{g^2}{4}A^\mu A^\nu A_\nu A_\mu).
+\end{align}
+The Feynman rules then give a gluon propagator $\delta^{ab}\frac{\eta_{\mu\nu}}{p^2}$.
+The Feynman vertex rules for calculating the color-ordered amplitudes are:
+\begin{align}
+     & V^{\mu_1 \mu_2 \mu_3}(p_1,p_2,p_3)=\includegraphics[valign=c,width=1in]{fig/yang-mills/3point/3point.pdf}=-\sqrt{2}g\left(\eta^{\mu_1 \mu_2}p_1^{\mu_3}+\eta^{\mu_2 \mu_3}p_2^{\mu_1}+\eta^{\mu_3 \mu_1}p_3^{\mu_2}\right) \\
+     & V^{\mu_1 \mu_2 \mu_3 \mu_4}(p_1,p_2,p_3,p_4)=\includegraphics[valign=c,width=1in]{fig/yang-mills/4point/4point.pdf}=g^2 \eta^{\mu_1 \mu_3}\eta^{\mu_2 \mu_4}.
+\end{align}
+
+The amplitudes constructed from these rules can be organized into different group theory structures each dressed with a kinematic factor.
+For example, the \textit{color factors} of the \textit{s-}, \textit{t-}, and \textit{u-}channel diagram of the 4-gluon tree amplitude are
+\begin{align}
+    c_s\equiv\tilde{f}^{a_1 a_2 b}\tilde{f}^{b a_3 a_4}\qc c_t\equiv\tilde{f}^{a_1 a_3 b}\tilde{f}^{b a_4 a_2}\qc c_u\equiv\tilde{f}^{a_1 a_4 b}\tilde{f}^{b a_2 a_3},
+\end{align}
+and the 4-point contact term generically gives a sum of contributions with $c_s,c_t$ and $c_u$ color factors.
+The \textit{Jacobi identity} relates the three color factors:
+\begin{align}
+    c_s+c_t+c_u=0.
+\end{align}
+So there are only two independent color-structures for the tree-level 4-gluon amplitude.
+
+With the normalzation condition, We can write the color factors in terms of traces of the generators $T^a$:
+\begin{align}
+    i\tilde{f}^{abc}=\Tr(T^a T^b T^c)-\Tr(T^b T^a T^c).
+\end{align}
+\begin{proof}
+    \begin{align}
+        \comm{T^a}{T^b}                   & =i\tilde{f}^{ab\alpha}T^\alpha \notag         \\
+        \comm{T^a}{T^b}T^c                & =i\tilde{f}^{ab\alpha}T^\alpha T^c\notag      \\
+        \Tr(\comm{T^a}{T^b}T^c)           & =i\tilde{f}^{ab\alpha}\Tr(T^\alpha T^c)\notag \\
+        \Tr(T^a T^b T^c)-\Tr(T^b T^a T^c) & =i\tilde{f}^{abc}\notag
+    \end{align}
+\end{proof}
+
+Products of traces can be simplified using the completeness relation
+\begin{align}
+    \tensor{\left(T^a\right)}{_i^j}\tensor{\left(T^a\right)}{_k^l}=\tensor{\delta}{_i^l}\tensor{\delta}{_k^j}-\frac{1}{N}\tensor{\delta}{_i^j}\tensor{\delta}{_k^l}.
+\end{align}
+\begin{proof}
+    123
+\end{proof}
+\begin{example}
+    For the 4-gluon $s$-channel diagram we have
+    \begin{align}
+        \tilde{f}^{a_1 a_2 b}\tilde{f}^{b a_3 a_4}= & \Tr(T^{a_1}T^{a_2}T^{a_3}T^{a_4})-\Tr(T^{a_1}T^{a_2}T^{a_4}T^{a_3})\notag \\
+                                                    & +\Tr(T^{a_1}T^{a_3}T^{a_4}T^{a_2})-\Tr(T^{a_1}T^{a_4}T^{a_3}T^{a_2}).
+    \end{align}
+    Similarly, the three other diagrams contributing to the 4-gluon amplitude can also be written in terms of single-trace group theory factors.
+    So that means that we can write the 4-gluon tree amplitude as
+    \begin{align}
+        A^{\text{full,tree}}_4=g^2\left(A_4[1234]\Tr(T^{a_1}T^{a_2}T^{a_3}T^{a_4})+\text{perms of }(234)\right),
+    \end{align}
+    where the \textit{partial amplitudes} $A_4[1234]$, $A_4[1243]$ etc. are called \textbf{color-ordered amplitudes}\sidenotemark.
+\end{example}
+\sidenotetext{We use the squared parenthesis in $A_4[1234]$ to distinguish the color-ordered amplitude from the non-color-ordered amplitude $A_4(1234)$.}
+The color-structure generalizes to any $n$-point tree-level amplitude involving any particles that transform in the adjoint of the gauge group: we write
+\begin{align}\label{fulltree}
+    A^{\text{full,tree}}_n=g^{n-2}\sum_{\text{perms}\ \sigma}A_n\left[1\sigma(2\dots n)\right]\Tr(T^{a_1}T^{\sigma(a_2}\cdots T^{a_n)}),
+\end{align}
+where the sum is over the (overcomplete) trace-basis of $(n-1)!$ elements that takes into account the cyclic nature of the traces\sidenote{For loop-amplitudes, one also needs to consider multi-trace structures in addition to the simple single-trace.}.
+\begin{remark}
+    \begin{enumerate}
+        \item \Cref{fulltree} is a general result for all gauge groups.
+        \item The color-ordered amplitudes have a number of properties:
+        \begin{itemize}
+            \item \textit{Cyclic}: $A_n[12\dots n]=A_n[2\dots n1]$, etc.
+            \item \textit{Reflection}: $A_n[12\dots n]=(-1)^n A_n[n\dots 21]$.
+            \item The U(1) \textit{decoupling identity} (also known as \textit{Kleiss-Kuijf relation} or \textit{photon decoupling identity}):
+                  \begin{align}
+                      A_n[123\dots n]+A_n[213\dots n]+A_n[231\dots n]+\cdots+A_n[23\dots1n]=0.
+                  \end{align}
+            \item The color-ordered amplitudes are gauge invariant:
+            
+                  The single traces in \cref{fulltree} are linear independent\cite{Taylor:2017sph}.
+    
+                  The "linear independence" here means that there exists no non-trivial set of numbers $\{\alpha_i\}$ such that 
+                  \begin{align}
+                    \sum_{\sigma_i}\sum_{j=1}^{N^2-1} \alpha_j \Tr(T^{a_1}T^{\sigma_j(a_2}\cdots T^{a_n)})=0,
+                  \end{align}
+                  where the sum runs over all possible permutations $\sigma_i$.
+        \end{itemize}
+    \end{enumerate}
+
+\end{remark}
+
+\clearpage
+
+\part{Loops}
+\section{Loop Amplitudes and Generalized Unitarity}
+In general, an $L$-loop amplitude can be written \textit{schematically} as
+\begin{align}
+    \mathcal{A}^{L-\text{loop}}_{n}=\sum_j\int\left(\prod_{l=1}^{L}\frac{\dd[D]{\ell_l}}{(2\pi)^D}\right)\frac{1}{S_j}\frac{n_j c_j}{\prod_{\alpha_j}p^{2}_{\alpha_j}},
+\end{align}
+where
+\begin{itemize}
+    \item $j$: runs over all possible $L$-loop Feynman diagrams $j$
+    \item $\ell_l$: the $L$ loop-momenta
+    \item $S_j$: symmetry factor associated with the diagram
+    \item $n_j$: kinematic numerator factors, which are polynomials of Lorentz-invariant contractions of external- or loop-momenta and polarization vectors (or other external wavefunctions).
+    \item $c_j$: couplings and gauge group factors.
+\end{itemize}
+
+We will be only concerned with the \textit{planar limit} of Yang-Mills amplitudes.
+In this context, the planar limit means that the amplitudes have only one trace-structure, just as the tree amplitudes.
+They are called \textit{planar amplitudes}.
+
+\clearpage
+
+\appendix
+\section{Conventions\label{convention}}
+We use a mostly-plus metric, $\eta_{\mu\nu}=\text{diag}(-1,+1,+1,+1)$ and define
+\begin{align}
+    \left(\sigma^{\mu}\right)\equiv\left(1,\sigma^i\right)_{a\dot{b}},\quad\quad\left(\bar{\sigma}^\mu\right)\equiv\left(1,-\sigma^i\right)^{\dot{a}b},
+\end{align}
+with Pauli matrices
+\begin{align}
+    \sigma^{1}=\begin{pmatrix}
+                   0 & 1 \\
+                   1 & 0
+               \end{pmatrix},\quad
+    \sigma^{2}=\begin{pmatrix}
+                   0 & -i \\
+                   i & 0
+               \end{pmatrix},\quad
+    \sigma^{3}=\begin{pmatrix}
+                   1 & 0  \\
+                   0 & -1
+               \end{pmatrix}.
+\end{align}
+Two-index spinor indices are raised/lowered using
+\begin{align}
+    \epsilon^{ab}=\epsilon^{\dot{a}\dot{b}}=\begin{pmatrix}
+                                                0  & 1 \\
+                                                -1 & 0
+                                            \end{pmatrix}=-\epsilon_{ab}=-\epsilon_{\dot{a}\dot{b}},
+\end{align}
+which obey $\epsilon_{ab}\epsilon^{bc}=\delta^{c}_{a}$.
+
+Define $\gamma$-matrices:
+\begin{align}
+    \gamma^\mu=\begin{pmatrix}
+                   0                                          & \left(\sigma^\mu\right)_{a\dot{b}} \\
+                   \left(\bar{\sigma}^{\mu}\right)^{\dot{a}b} & 0
+               \end{pmatrix},\quad\quad
+    \left\{\gamma^\mu,\gamma^\nu\right\}=-2\eta^{\mu\nu},
+\end{align}
+and
+\begin{align}
+    \gamma_5\equiv i\gamma^0\gamma^1\gamma^2\gamma^3,\quad\quad P_L=\frac{1}{2}(1-\gamma_5),\quad\quad P_R=\frac{1}{2}(1+\gamma_5).
+\end{align}
+
+\clearpage
+
+
+\bibliographystyle{jhep}
+\bibliography{ref}
+\end{document}

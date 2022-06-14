@@ -1,0 +1,526 @@
+\documentclass[10pt]{article}
+\usepackage{NotesTeXV3}
+\usepackage{orcidlink}
+\usepackage{tensor}
+\usepackage{cleveref}
+
+
+\let\oldsection\section
+\def\section{%
+  \setcounter{sidenote}{1}%
+  \oldsection
+}
+
+\newcommand{\me}{\mathrm{e}}
+
+
+\begin{document}
+\title{Topology and Geometry}
+\subheader{Notes}
+\author{Shangjie Zhou\orcidlink{0000-0001-9576-5011}}
+\affiliation{School of Physics and Technology, Wuhan University}
+\emailAdd{sjzhou@whu.edu.cn}
+\abstract{\textit{Last updated on: \today}\\\url{https://github.com/spaceofzsj/notes}}
+
+\maketitle
+
+\section{Mathematical Preliminaries}
+\subsection{Maps}
+\subsection{Vector Spaces}
+\subsection{Topological Spaces}
+\subsection{Homeomorphisms and Topological Invariants}
+\subsubsection{Homeomorphisms}
+The purpose of topology is to classify spaces.
+
+For example, in elementary geometry, the equivalence of figures is given by congruence, which turns out to be too stringent for our purpose.
+In topolgy, we define two figures to be equivalent if it is possible to deform one figure into the other by \textit{continuous deformation}.
+\begin{definition}\label{homeomorphism}
+    Let $X_1$ and $X_2$ be topological spaces.
+    A map $f : X_{1}\to X_{2}$ is a \textbf{homeomorphism} if it is continuous and has an inverse $f^{-1}:X_{2}\to X_{1}$ which is also continuous.
+    If there exists a homeomorphism between $X_1$ and $X_2$ , $X_1$ is said to be \textbf{homeomorphic} to $X_2$ and vice versa.
+\end{definition}
+
+A homeomorphism is an equivalence relation and the proof is:
+\begin{proof}
+    \begin{itemize}
+        \item Reflectivity: simply choose $f=\text{id}_X$.
+        \item Symmetry: by definition, if $f : X_1 \to X_2$ is a homeomorphism, so is $f^{-1} : X_2 \to X_1$. (Using $(f^{-1})^{-1}=f$)
+        \item Transitivity: if $f : X_1 \to X_2$ and $g : X_2 \to X_3$ are homeomorphisms, so is $g\circ f : X_1\rightarrow X_3$.
+    \end{itemize}
+\end{proof}
+
+Intuitively speaking, two topological spaces are homeomorphic to each other if we can deform one into the other continuously, that is, without tearing them apart or pasting.
+\begin{example}
+    An open disc $D^2= \left\{ (x,y)\in\mathbb{R}^{2}|x^2+y^2<1 \right\}$ is homeomorphic to $\mathbb{R}^2$ when we choose
+    \begin{align}
+        f(x,y)=\left(\frac{x}{\sqrt{1-x^2-y^2}},\frac{y}{1-x^2-y^2}\right)
+    \end{align}
+\end{example}
+
+\subsubsection{Topological Invariants}
+\textbf{Topological invariants} are quantities to characterize equivalence clsses of homeomorphism.
+
+If two spaces are homeomorphic to each other,they have the same "topological invariants".
+And if two spaces have different "topological invariants",they are not homeomorphic to each other.
+
+\subsubsection{Homotomy type}
+The condition of homeomorphism is too restrict, we will see it would be useful to define a new equivalent class, namely of the \textit{same homotopy type}.
+
+Just relax the condition in \cref{homeomorphism} so that the continuous functions $f$ and $g$ need not have inverses.
+
+\subsubsection{Euler Characteristic: An Example}
+In this section, We focus on $\mathbb{R}^3$.
+\begin{definition}
+    Let $X$ be a subset of $\mathbb{R}^3$, which is homeomorphic to a polyderon $K$.
+    Then the \textbf{Euler characteristic} $\chi(X)$ of $X$ is defined by
+    \begin{align}
+        \chi(X)= & (\text{number of verticies in}\ K)-(\text{number of edges in}\ K) \\
+                 & +(\text{number of faces in}\ K)
+    \end{align}
+\end{definition}
+
+\begin{theorem}[Poincar{\'e}-Alexander]
+    The Euler characteristic $\chi(X)$ is idependent of the polyhedron $K$ as long as $K$ is homeomorphic to $X$.
+\end{theorem}
+
+The \textit{connected sum} $X \sharp Y$ of two surfaces $X$ and $Y$ is a surface obtained by removing a small disc from each $X$ and $Y$ and connecting the resulting holes with a cylinder.
+
+It is obvious that $ S^{2} \sharp X=X $ and $T^{2}\sharp T^{2}$.
+An immediate generalization is
+\begin{align}
+    \underbrace{T^{2}\sharp T^{2}\sharp\cdots\sharp T^{2}}_{g\ \text{factors}}=\Sigma_g.
+\end{align}
+
+\begin{theorem}
+    Let $X$ and $Y$ be two surfaces.
+    Then the Euler characteristic of the connected sum $X\sharp Y$ is given by
+    \begin{align}
+        \chi(X\sharp Y)=\chi(X)+\chi(Y)-2.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+
+\begin{theorem}
+    Let $X$ and $Y$ be two figures in $\mathbb{R}^3$.
+    If $X$ is homeomorphic to $Y$, then $\chi(X)=\chi(Y)$.
+    In other words, if $\chi(X)\neq\chi(Y)$, $X$ cannot be homeomorphic to $Y$.
+\end{theorem}
+While compactness and connectedness are geometrical properties of a figure or a space $X$, the Euler characteristic is a integer $\chi(X)\in\mathbb{Z}$, which is algebraic.
+It implies that the Euler characteristic can relate geometry to algebra\sidenote{We may compute the Euler characteristic of a smooth surface with \textit{Gauss-Bonnet theorem}.}.
+
+
+\section{Homology Groups}
+\subsection{Abelian Groups}
+\subsection{Simplexes and Simplicial Complexes}
+\subsection{Homology Groups of Simplicial Complexes}
+\subsection{General Properties of Homology Groups}
+
+
+\section{Homotopy Groups}
+\subsection{Fundamental Groups}
+\subsection{General Properties of Fundamental Groups}
+\subsection{Examples of Fundamental Groups}
+\subsection{Fundamental Groups of Polyhedra}
+\subsection{Higher homotopy groups}
+\subsection{General Properties of Higher Homotopy Groups}
+\subsection{Examples of Higher Homotopy Groups}
+\subsection{Orders in Condensed Matter Systems}
+\subsubsection{Order Parameter}
+\textbf{Spontaneous symmetry breakdown}: Assume the the hamiltonian of a system $H$ is invariant under a certain symmetry operation.  
+The ground state of the system need not preserve the symmetry of $H$.
+\begin{example}[Heisenberg Hamiltonian]
+    \begin{align}
+        H=-J\sum_{(i,j)}\vec{S}_i\cdot\vec{S}_j+\vec{h}\cdot\sum_i \vec{S}_i.
+    \end{align}
+    Note that we are talking about quantum mechanics so $H$ here is an operator.
+
+    The $\vec{S}_i$ are ferromagnetic Heisenberg spins and $J=\text{const}>0$. 
+    The summation is over the pair of the nearest-neighbour sites $(i,j)$ and $\vec{h}$ is the uniform external magnetic field.
+    
+    The \textit{partition function} is $Z\equiv\Tr\left(\text{e}^{-\beta H}\right)=\sum_i \me^{-\beta E_i}$ where $\beta=1/T$ is the inverse temperature and $E_i$ are eigenvalues of $H$. 
+    The \textit{free energy} is defined by $\exp(-\beta F)=Z$. 
+    The average magnetization per spin is defined as:
+    \begin{align}
+        \vec{m}\equiv\frac{1}{N}\sum_{i}\langle\vec{S}_i\rangle=\frac{1}{N\beta}\frac{\partial F}{\partial \vec{h}},
+    \end{align}
+    where $\langle\dots\rangle\equiv\Tr(\dots \text{e}^{-\beta H})/Z$ can be interpreted to be the expectation value.
+
+    In the limit $\vec{h}\rightarrow 0$ ($H\rightarrow -J\sum_{(i,j)}\vec{S}_i\cdot\vec{S}_j$), $H$ is invariant under $\text{SO}(3)$ but $\vec{m}$ doesn't vanish because of the ferromagnetism. 
+    It is said that the system exhibits \textbf{spontaneous magnetization}.
+
+    In this example, the vector $\vec{m}$ is called the \textbf{order parameter} describing the phase transition between the ordered state and the disordered state.
+\end{example}
+The free energy of a system is defined by
+\begin{align}
+    F=\langle H\rangle-TS,    
+\end{align}
+$S$ is entropy and equilibrium is obtained by minimizing $F$.
+
+When temperature is low, $F\approx\langle H\rangle$. 
+All $S_i$ align in the same direction.
+When temperature is high, $F\approx-TS$. 
+All $S_i$ are totally random.
+
+In the Heisenberg Hamiltonian example, when the temperature is uniform, $\abs{\vec{m}(\vec{x})}$ is constant so $\vec{m}$ can be characterized by polar coordinates $(\theta,\phi)$ on $S^2$. 
+Now we have a map $\vec{m}: \vec{x}\to\vec{m}(\vec{x})$ or $\mathbb{R}^3\rightarrow S^2$.
+
+The excited states of this system depend on this map $\vec{m}$ (in other systems, the order parameter may be not a vector). 
+Now we make a generalization to all systems that these kinds of excitation depends on the topological arguments are called \textbf{topological excitations}.
+
+\subsubsection{Superfluid \texorpdfstring{{}$^4\text{He}$}{} and superconductors}
+The order parameter of  $^4\text{He}$ is the expectation value:
+\begin{align}
+    \expval{\phi(\vec{x})}=\Psi(\vec{x})=\Delta_0 (\vec{x})\me^{i\alpha(\vec{x})}.
+\end{align}
+
+In the BCS theory of superconductors, the order parameter is given by:
+\begin{align}
+    \psi_{\alpha\beta}\equiv\expval{\psi_\alpha(\vec{x})\psi_\beta(\vec{x})}.
+\end{align}
+We can see that the order parameter may even not be a scalar.
+
+\subsubsection{General Consideration}
+The order parameter of a 3D superconductor is $\psi(x)=\Delta_0(\vec{x})\text{e}^{i\phi(\vec{x})}$. 
+When a homogeneous system is under uniform external conditions, $\Delta_0$ is a constant. 
+So $\psi(x)\cong\text{U(1)}$.
+
+We call the collection of order parameter values the \textbf{order parameter space} $M$. 
+For superconductor, $M=\text{U(1)}$ and for nematic liquid crystal $M=\mathbb{R}P^2$.
+
+There are cases that the order parameter takes value outside $M$ (inhomogeneous state), but we still assume order parameters take value in $M$ when the scale of the system is large enough.
+
+However, there are also some points, lines or surfaces where the order parameters may not be defined uniquely. 
+We call them \textbf{point defects (monopoles), line defects (vortices) and surface defects (domain walls)}.
+
+Consider a system, the order parameter is a classical field $\psi(x)$ and it can be regarded as a map $\psi:X\to M$.
+
+Imagine there is a line defect. 
+We enclose it by a circle $S^1$ and pick a reference point $x_0$ on it. 
+Thus, we just defined a loop $S^1\to M$. 
+Recall from the homotopy group, we can now classify this loop according to the homotopy class they belong to.
+
+For example, for superconductor $M=\text{U(1)}$ and $\pi_1\left(\text{U(1)},x_0\right)\cong\mathbb{Z}$. 
+So it's possible to assign an integer to each loop and we call it the \textbf{winding number} of the loop.
+
+We can also generlize to other kinds of defects. 
+Just pick a sphere $S^n$ which surrounds the defect and classify this sphere by homotopy classes or $\pi_n(M,x_0)$.
+\begin{remark}
+    Assume there is an $m$-dimensional defect $A$ in $X$. 
+    If we can find an $n$-dimensional sphere $S^n$ which crosses the defect when continuously shrink to a point $S^0$ in any way, then we say this sphere surrounds $A$.
+\end{remark}
+
+In general, an $m$-dimensional defect in a $d$-dimensional medium is classified by the homotopy group $\pi_n(M,x_0)$ where:
+\begin{align}
+    n=d-m-1
+\end{align}
+
+\subsection{Defects in Nematic Liquid Crystals}
+\subsubsection{Order Parameter of Nematic Liquid Crystals}
+An example of nematic liquid crystal is \textit{octyloxy-cyanobiphenyl} whose molecule looks like a rod and the order parameter of it is \textbf{director} which is given by the average direction of the "rod". 
+
+The director has an inversion symmetry which means we can not distinguish the directors $\vec{n}=\rightarrow$ and $-\vec{n}=\leftarrow$, so the order parameter lives in the \textbf{projective plane} $\mathbb{R}P^2$.
+
+The director in general depends on the position $\vec{r}$. 
+Then we may define a map $f:\mathbb{R}^3\to\mathbb{R}P^2$ and this map is called the \textbf{texture}.
+
+\subsubsection{Line Defects in Nematic Liquid Crystals}
+From the fact that $\pi_1(\mathbb{R}P^2)\cong\mathbb{Z}_2=\{0,1\}$, there exist two kind of line defect in the nematic liquid crystals; 
+one can be continuously deformed into a uniform configuration while the other cannot.
+\begin{remark}[continuous deformation]
+    Take $M=\mathbb{R}P^2$ as an example. 
+    Denote the initial distribution is A$(\vec{r})$. 
+    We say $A(\vec{r})$ can be continuously deformed into if there exists an \textit{continuous map} $f:\mathbb{R}^3\times I\to\mathbb{R}P^2$ where $f$ satisfies:
+    \begin{enumerate}
+        \item $f(\vec{r},0)=A(\vec{r})$,
+        \item $f(\vec{r},1)=B(\vec{r})$.
+    \end{enumerate}
+\end{remark}
+
+\subsubsection{Point Defects in Nematic Liquid Crystals}
+A line defect and a point defect may be (\textit{when the line defect is "closed"})conbined into a \textbf{ring defect}. 
+
+\subsubsection{Higher Dimensional Texture}
+After choosing a \textit{standard director} $\vec{n}_0$, a director $\vec{n}$ at any position can be characterized by a 3-dimensional rotation $R(\vec{e},\alpha)\in\text{SO(3)}$: $\vec{n}=R(\vec{e},\alpha)\vec{n}_0$. 
+
+An arbitrary rotation in $\mathbb{R}^3$ is specified by a unit vector $\vec{e}$, around which the rotation is carried out, and the rotation angle $\alpha$. 
+It is possible to assign a "vector" $\vec{\Omega}=\alpha \vec{e}$ to the rotation. 
+It is not exactly a vector since $\Omega =\pi\vec{e}$ and $-\Omega=-\pi\vec{e}$ are the same rotation and hence should be identified. 
+Therefore, $\vec{\Omega}$ belongs to the real projective space $\mathbb{R}P^3$.
+
+\subsection{Textures in Superfluid \texorpdfstring{{}$^3\text{He-A}$}{}}
+\subsubsection{Superfluid \texorpdfstring{{}$^3\text{He-A}$}{}}
+Order parameter of $^4$He-A is 
+\begin{align}
+    A_{\mu i}=d_\mu (\vec{\Delta}_1+i\vec{\Delta}_2)_i
+\end{align}
+where $\vec{d}$ is a unit vector along which the spin projection of the Cooper pair vanishes and $\left(\vec{\Delta}_1,\vec{\Delta}_2\right)$ is a pair of orthonormal unit vectors.
+
+If we define $\vec{l}\equiv\vec{\Delta}_1\times\vec{\Delta}_2$, the triad $(\vec{\Delta}_1,\vec{\Delta}_2,\vec{l})$ forms an orthonormal frame at each point of the medium. 
+Since any orthonormal frame can be obtained from a standard orthonormal frame $(\vec{e}_1,\vec{e}_2,\vec{e}_3)$ by an application of a three-dimensional rotation matrix. 
+Thus, the order parameter is $S^2\times\text{SO(3)}$.
+
+For simplicity, we ingore the variation of $\hat{d}$. 
+So the order parameter has the form:
+\begin{align}
+    A_i=\Delta_0\left(\hat{\Delta}_1+\hat{\Delta}_2\right)_i.
+\end{align}
+The order parameter have defined a map $\psi:X\to\text{SO(3)}$. 
+$\psi$ is called the texture of $^3\text{He}$. 
+The relevant homotopy groups for classifying defects in superfluid $^3\text{He-A}$ are $\pi_n(\text{SO(3)})$.
+
+\subsubsection{Line Defects and Non-singular Vortices in \texorpdfstring{$^3\text{He-A}$}{}}
+From the fact $\text{SO(3)}\cong\mathbb{R}P^3$, we have $\pi_1(\text{SO(3)})\cong\pi_1(\mathbb{R}P^3)\cong\mathbb{Z}_2\cong\{0,1\}$.
+
+Textures which belong to class 0 can be continuously deformed into the uniform configuration. 
+Configurations in class 1 are called \textbf{disgyrations}.
+
+\subsubsection{Shankar monopole in \texorpdfstring{$^3\text{He-A}$}{}}
+If we specify an element in $\text{SO(3)}$ on each position of the space and denote the distribution by $\vec{\Omega}\left(\vec{x}\right)$ \sidenote{Remember that we can specify a rotation by an unit vector $\vec{n}$ and the rotation angle $\alpha$.}, then we get a texture.
+
+Shankar proposed a texture:
+\begin{align}
+    \vec{\Omega}(\vec{r})=\frac{\vec{r}}{r}\cdot f(r),
+\end{align}
+where
+\begin{align}
+    f(\vec{r})=\begin{cases}
+        2\pi & r=0\\\\
+        0    & r=\infty.
+    \end{cases}
+\end{align}
+This texture is called \textbf{Shankar monopole}.
+
+\section{Manifolds}
+\subsection{Manifolds}
+\subsection{The Calculus on Manifolds}
+\subsection{Flows and Lie Derivatives}
+\subsection{Differential Forms}
+\subsection{Integration of Differential Forms}
+\subsubsection{Orientation}
+An integration of a differential form over a manifold $M$ is defined only when $M$ is \textit{orientable}.
+
+Suppose there is a point $p\in M$ and $p$ belongs to two (or more) different charts $U_i$ with local coordinates $x^\mu$ and $U_j$ with local coordinates $y^\alpha$.
+Thus, $T_p M$ is spanned by either $\{e_\mu\}=\{\frac{\partial}{\partial x^\mu}\}$ or $\{\tilde{e_\alpha}\}=\{\frac{\partial}{\partial y^\alpha}\}$.
+The basis transforms as:
+\begin{align}
+    \tilde{e}_\alpha=\left(\frac{\partial x^\mu}{\partial y^\alpha}\right)e_{\mu}.
+\end{align}
+If $J\equiv\det(\frac{\partial x^\mu}{\partial y^\alpha})>0$ for $\forall p\in U_i \cap U_j$, then $\{e_\mu\}$ and $\{\tilde{e}_\alpha\}$ are said to define the \textit{same orientation}.
+If $J<0$ for $\forall p\in U_i \cap U_j$, then $\{e_\mu\}$ and $\{\tilde{e}_\alpha\}$ are said to define the \textit{opposite orientation}.
+\begin{definition}
+    Let $M$ be a connected manifold coverd by $\{U_i\}$.
+    The manifold $M$ is \textbf{orientable} if, for any overlapping charts $U_i$ and $U_j$, there exist local coordinates $\{x^\mu\}$ for $U_i$ and $\{y^\alpha\}$ for $U_j$ such that $J=\det(\frac{\partial x^\mu}{\partial y^\alpha})>0$.
+\end{definition}
+If $M$ is non-orientable, $J$ cannot be positive in all intersections of charts.
+If an $m$-dimensional manifold $M$ is orientable, there exists an $m$-form $\omega$ which vanishes nowhere.
+This $m$-form $\omega$ is called a \textbf{volume element}.
+Two volume elements $\omega$ and $\omega'$ are said to be equivalent if there exists a strictly positive function $h \in \mathcal{F}(M)$ such that $\omega=h\omega'$.
+Any orientable manifold admits two inequivalent orientations.
+\subsubsection{Integration of Forms}
+If there is a function $f$ on manifold $M$, we first define the integration of an $m$-form $f\omega$ on a chart by
+\begin{align}
+    \int_{U_i}f\omega\equiv\int_{\phi(U_i)}f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\dd{x^1} \dd{x^2}\dots \dd{x^m}
+\end{align}
+\begin{definition}
+    Take an open covering $\{U_i\}$ of $M$ such that each point of $M$ is covered with a finite number of $U_i$.
+    If a family of differentiable functions $\epsilon_i(p)$ satisfies
+    \begin{enumerate}
+        \item $0\le\epsilon_i(p)\le1$
+        \item $\epsilon_i(p)=0$ if $p\notin U_i$
+        \item $\epsilon_1(p)+\epsilon_2(p)+\dots=1$ for any point $p\in M$
+    \end{enumerate}
+    the family $\{\epsilon(p)\}$ is called a \textbf{partition of unity} subordinate to the covering $\{U_i\}$.
+\end{definition}
+\begin{remark}
+    $\epsilon_i$s are globally defined on the manifold $M$.
+\end{remark}
+So we have:
+\begin{align}
+    f(p)=\sum_{i}f(p)\epsilon_i(p)=\sum_i f_i(p),
+\end{align}
+where $f_i(p)\equiv f(p)\epsilon_i(p)$.
+Note that $f_i(p)=0$ when $p\notin U_i$.
+Now, we can define the integral of $f$ on the entire $M$ by
+\begin{align}
+    \int_M f\omega\equiv\sum_i \int_{U_i}f_i \omega.
+\end{align}
+\begin{remark}
+    Different atlas give the same result of the integral.
+\end{remark}
+\begin{proof}
+    Assume there are two (or more) different atlas $\{(U_i,\phi_i)\}$ with partition of unity $\epsilon_i$ and $\{(V_j,\psi_j)\}$ with partition of unity $\epsilon_j'$ defined on $M$, then
+    \begin{align}
+        \sum_i\int_{U_i}f_i\omega & =\sum_i\int_{\phi(U_i)}\epsilon_i\left(\phi_{i}^{-1}(x)\right) f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\widetilde{\dd{x}}\notag                                                        \\
+                                  & =\sum_j \sum_i\int_{\phi(U_i)}\epsilon_j'\left(\phi_{i}^{-1}(x)\right)\epsilon_i\left(\phi_{i}^{-1}(x)\right) f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\widetilde{\dd{x}}\notag         \\
+                                  & =\sum_j \sum_i\int_{\phi(U_i\cap V_j)}\epsilon_j'\left(\phi_{j}^{-1}(x)\right)\epsilon_i\left(\phi_{i}^{-1}(x)\right) f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\widetilde{\dd{x}}\notag \\
+                                  & =\sum_j \sum_i\int_{\psi(U_i\cap V_j)}\epsilon_j'\left(\psi_{j}^{-1}(x)\right)\epsilon_i\left(\psi_{i}^{-1}(x)\right) f\left(\psi_{i}^{-1}(x)\right)g\left(\psi_{i}^{-1}(x)\right)\widetilde{\dd{y}}\notag \\
+                                  & =\sum_j \sum_i\int_{\psi(V_j)}\epsilon_j'\left(\psi_{j}^{-1}(x)\right)\epsilon_i\left(\psi_{i}^{-1}(x)\right) f\left(\psi_{i}^{-1}(x)\right)g\left(\psi_{i}^{-1}(x)\right)\widetilde{\dd{y}}\notag         \\
+                                  & =\sum_j \int_{\psi(V_j)}\epsilon_j'\left(\psi_{j}^{-1}(x)\right) f\left(\psi_{i}^{-1}(x)\right)g\left(\psi_{i}^{-1}(x)\right)\widetilde{\dd{y}}\notag                                                      \\
+                                  & =\sum_j \int_{V_j}f_j'\omega,\notag
+    \end{align}
+    where $\widetilde{\dd{x}}\equiv\dd{x^1} \dd{x^2} \dots \dd{x^m}$ and $\widetilde{\dd{y}}\equiv\dd{y^1} \dd{y^2} \dots \dd{y^m}$.
+\end{proof}
+\subsection{Lie Groups and Lie Algebras}
+\subsection{The Action of Lie Groups on Manifolds}
+
+
+\section{de Rham Cohomology Groups}
+\subsection{Stokes’ Theorem}
+\subsection{de Rham Cohomology Groups}
+\subsection{Poincar{\'e}’s lemma}
+\subsection{Structure of de Rham Cohomology Groups}
+
+
+\section{Riemannian Geometry}
+\subsection{Riemannian Manifolds and Pseudo-Riemannian Manifolds}
+\subsubsection{Metric Tensors}
+
+\begin{definition}
+    Let $M$ be a differentiable manifold.
+    A \textbf{Riemannian metric} $g$ on $M$ is a type $(0, 2)$ tensor field on $M$ which satisfies the following axioms at each point $p \in M$:
+    \begin{enumerate}
+        \item $g_p(U,V)=g_p(V,U)$
+        \item $g_p(U,U)\ge0$, where the equality holds only when $U=0$,
+    \end{enumerate}
+    where $U,V\in T_p M$ and $g_p\equiv\eval{g}_p$.
+\end{definition}
+
+A tensor field $g$ of type $(0, 2)$ is a \textbf{pseudo-Riemannian metric} if it satisfies:
+\begin{enumerate}
+    \item $g_p(U,V)=g_p(V,U)$
+    \item if $g_p(U,V)=0$ for any $U\in T_p M$, then $V=0$.
+\end{enumerate}
+
+If there exists a metric $g$, we can define the inner product between two vectors $U, V\in T_pM$ to be $g_p(U,V)$.
+It can be seen that $g(U,\cdot)$ is a map $T_pM\to \mathbb{R}$ by $V\mapsto g_p(U,V)$, which means that it can be identified with a one-form $\omega_U\in T_p^* M$.
+Similarly, $\omega\in T^*_p M$ induces $V_\omega\in T_pM$ by $\langle \omega,U\rangle=g(V_\omega,U)$.
+Thus, the metric $g_p$ gives rise to an isomorphism between $T_pM$ and $T^*_pM$.
+
+Let $(U,\phi)$ be a chart in $M$ and $\{x^\mu\}$ the coordinates.
+We can expand $g_p$ as:
+\begin{align}
+    g_p=g_{\mu\nu}(p)\dd x^\mu\otimes\dd x^\nu
+\end{align}
+and
+\begin{align}
+    g_{\mu\nu}(p)=g_p\left(\frac{\partial}{\partial x^\mu},\frac{\partial}{\partial x^\nu}\right) \quad (p\in M).
+\end{align}
+
+Subscript in $g_p$ is usually omitted.
+It is common to regard $g_{\mu\nu}$ as a matrix.
+Since $g_{\mu\nu}$ has maximal rank, we can define its inverse $g^{\mu\nu}$ by $g_{\mu\nu}g^{\nu\lambda}=g^{\lambda\nu}g_{\nu\mu}=\delta^\lambda_\mu$.
+
+We define $g\equiv\det(g_{\mu\nu})$.
+Clearly, $\det(g^{\mu\nu})=g^{-1}$.
+
+The isomorphism between $T_p M$ and $T^*_p M$ is now expressed as
+\begin{align}
+    \omega_\mu=g_{\mu\nu},\quad U^\mu=g^{\mu\nu}\omega_\nu.
+\end{align}
+
+It's a convention to denote a metric in the form of an infinitestimal displacement
+\begin{align}
+    \dd s^2=g(\dd x^\mu\frac{\partial}{\partial x^\mu},\dd x^\nu\frac{\partial}{\partial x^\nu})=g_{\mu\nu}\dd x^\mu\dd x^\nu.
+\end{align}
+
+Since $g^{\mu\nu}$ is a symmetric matrix, the eigenvalues are real.
+If $g$ is Riemannian, all the eigenvalues are strictly positive and if $g$ is pseudo-Riemannian, some of them may be negative.
+If there are $i$ positive and $j$ negative eigenvalues, the pair $(i, j)$ is called the index of the metric.
+If $j = 1$, the metric is called a Lorentz metric.
+
+We can always diagonize and reduce the matrix element of $g$ to $\pm1$ by a change of basis.
+After this procedure, if we start with a
+\begin{itemize}
+    \item Riemannian metric, we end up with the \textbf{Euclidean metric} $\delta=\text{diag}(1,\dots,1)$.
+    \item Lorentz metric, we end up with the \textbf{Minkowski metric} $\eta=\text{diag}(-1,1,\dots,1)$.
+\end{itemize}
+
+If $(M,g)$ is Lorentzian, the elements of $T_p M$ can be devided into
+\begin{enumerate}
+    \item $g(U,U)>0\to U$ is \textbf{spacelike},
+    \item $g(U,U)=0\to U$ is \textbf{lightlike}(or \textbf{null}),
+    \item $g(U,U)<0\to U$ is \textbf{timelike}.
+\end{enumerate}
+
+If a smooth manifold $M$ admits a Riemannian metric $g$, the pair $(M, g)$ is called a \textbf{Riemannian manifold}.
+If $g$ is a pseudo-Riemannian metric, $(M,g)$ is called a \textbf{pseudo-Riemannian manifold}.
+If $g$ is Lorentzian, $(M, g)$ is called a \textbf{Lorentz manifold}.
+\subsubsection{Induced Metric}
+Let $M$ be an $m$-dimensional submanifold of an $n$-dimensional Riemanian manifold $N$ with the metric $g_N$.
+If $f:M\to N$ is the embedding which induces the submanifold structure of $M$, the pullback map $f^*$ induces the natural metric $g_M=f^* g_N$ on $M$ (\textbf{induced metric}).
+The components of $g_M$ are given by
+\begin{align}
+    g_{M\mu\nu}(x)=g_{N\alpha\beta}(f(x))\frac{\partial f^\alpha}{\partial x^\mu}\frac{\partial f^\beta}{\partial x^\nu}
+\end{align}
+where $f^\alpha$ denote the coordinates of $f(x)$.
+
+\subsection{Parallel Transport, Connection and Covariant Derivative}
+\subsubsection{Heuristic Introduction}
+We want to compare vectors defined on different points on the manifold.
+
+Before we compare two vectors defined at different points, we have to "move" a vector defined at one place to another without "changing" it (\textbf{parallel transport}).
+So it's necessary to specify the rules of the parallel transport, which requires an extra structure called \textbf{connection}.
+
+Let $\widetilde{V} \vert_{x+\Delta x}$ denote a vector $V|_{x}$ parallel transported $x+\Delta x$.
+Heuristically, We demand that the components satisfy
+\begin{align}
+    \widetilde{V}^\mu(x+\Delta x)-V^\mu(x) & \propto\Delta x                                               \\
+    \widetilde{(V^\mu+W^\mu)}(x+\Delta x)  & =\widetilde{V}^\mu(x+\Delta x)+\widetilde{W}^\mu(x+\Delta x).
+\end{align}
+These conditions are satisfied if we take
+\begin{align}
+    \widetilde{V}^\mu(x+\Delta x)=V^\mu(x)-V^\lambda(x)\tensor{\Gamma}{^{\mu}_{\nu\lambda}}\Delta x^\nu
+\end{align}
+There are many distinct rules of parallel transport possible, one for each choice of $\Gamma$.
+
+If the manifold is endowed with a metric, there exists a preferred choice of $\Gamma$, called the \textbf{Levi-Civita connection}.
+Levi-Civita connection satisfies
+\begin{enumerate}
+    \item $\tensor{\Gamma}{^{\lambda}_{\mu\nu}} = \tensor{\Gamma}{^{\lambda}_{\nu\mu}}$
+    \item the norm of a vector is invariant under parallel transport.
+\end{enumerate}
+\subsubsection{Affine Connections}
+\begin{definition}
+    An \textbf{affine connection} $\nabla$ is a map $\nabla: \chi(M)\times\chi(M)\to\chi(M)$, or $(X,Y)\mapsto\nabla_X Y$ which satisfies the following conditions:
+    \begin{align}
+        \nabla_X(Y+Z)   & =\nabla_X Y+\nabla_X Z  \\
+        \nabla_{(X+Y)}Z & =\nabla_{X}Z+\nabla_Y Z \\
+        \nabla_{(fX)}Y  & =f\nabla_{X}Y\notag     \\
+        \nabla_X (fY)   & =X[f]Y+f\nabla_X Y
+    \end{align}
+    where $f\in\mathcal{F}(M)$ and $X,Y,Z\in\chi(M)$.
+\end{definition}
+
+Take a chart $(U,\phi)$ with the coordinate $x=\phi(p)$ on $M$, and define $m^3$ functions $\Gamma_{\nu\mu}^{\lambda}$ called the \textbf{connection coefficients} by
+\begin{align}
+    \nabla_\nu e_\mu\equiv\nabla_{e_\nu}e_\mu=e_\lambda\tensor{\Gamma}{^{\lambda}_{\nu\mu}}
+\end{align}
+where $\{e_\mu\}=\{\partial/\partial x^\mu\}$ is the coordinate basis in $T_p M$.
+
+Let $V=V^\mu e_\mu$ and $W=W^\nu e_\nu$ be elements of $T_p(M)$.
+Then
+\begin{align}
+    \nabla_V W=V^\mu\left(\frac{\partial W^\lambda}{\partial x^\mu}+W^\nu \tensor{\Gamma}{^\lambda_{\mu\nu}}\right)e_\lambda.
+\end{align}
+We can see that the components of $\nabla_VW$ do not depend on the derivative of components of $V$ namely $\partial V^\lambda/\partial x^\mu$, so $\nabla_V W$ can be seen to be a generalization of directional derivative to tensors.
+\subsubsection{Parallel Transport and Geodesics}
+
+\subsection{Curvature and Torsion}
+\subsection{Levi-Civita Connections}
+\subsection{Holonomy}
+\subsection{Isometries and Conformal Transformations}
+\subsection{Killing Vector Fields and Conformal Killing Vector Fields}
+\subsection{Non-coordinate Bases}
+\subsection{Differential Forms and Hodge Theory}
+\subsection{Aspects of General Relativity}
+\subsection{Bosonic String Theory}
+
+
+
+
+\newpage
+\bibliographystyle{jhep}
+\bibliography{ref}
+\end{document}
