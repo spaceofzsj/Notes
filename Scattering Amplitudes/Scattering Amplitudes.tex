@@ -5,8 +5,9 @@
 \usepackage{cleveref}
 \usepackage{slashed}
 \usepackage[export]{adjustbox}
-\usepackage{docmute}
-\usepackage{chapterbib}
+\usepackage{silence}
+
+\WarningFilter{latex}{Marginpar on page}
 
 \hbadness=99999
 
@@ -164,16 +165,16 @@ The spin-sum completeness relation with $m=0$ which reads $u_-\bar{u}_-+u_+\bar{
 
 \clearpage
 
-\section{Yang-Mills Theory}
+\section{Yang-Mills Theory and Color Decomposition}
 Gluons are described by the Yang-Mills Lagrangian
 \begin{align}
     \mathcal{L}=-\frac{1}{4}\Tr F_{\mu\nu}F^{\mu\nu},
 \end{align}
 with $F_{\mu\nu}=\partial_\mu A_\nu-\partial_{\mu}A_\mu-\frac{ig}{\sqrt{2}}\comm{A_\mu}{A_\nu}$ and $A_\mu=A^a_{\mu}T^a$.
 
-The gauge group $G=\text{SU}(3)$ for QCD, but we will keep the number of colors $N$ general and take $G=\text{SU}(N)$.
-The gluon fields are in the adjoint representation, so the color-indices run over $a,b,\dots=1,2,\dots,N^2-1$.
-The generators $T^a$ are normalized such that $\Tr T^a T^b=\delta^{ab}$ and $\comm{T^a}{T^b}=i\tilde{f}^{abc}T^{c}$.
+The gauge group $G=\text{SU}(3)$ for QCD, but we will keep the number of colors $N_c$ general and take $G=\text{SU}(N_c)$.
+The gluon fields are in the adjoint representation, so the color-indices run over $a,b,\dots=1,2,\dots,N_c^2-1$.
+The generators $T^a$ are normalized such that $\Tr(T^a T^b)=\delta^{ab}$ and $\comm{T^a}{T^b}=i\tilde{f}^{abc}T^{c}$.
 
 \lec{Feynman Rules}{Yang-Mills Theory}In \textit{Gervais-Neveu gauge} for which the gauge-fixing term is $\mathcal{L}_{gf}=-\frac{1}{2}\Tr\left(\tensor{H}{_\mu^\mu}\right)^2$ with $H_{\mu\nu}=\partial_\mu A_\nu-\frac{ig}{\sqrt{2}}A_\mu A_\nu$,
 the Lagrangian takes the form\sidenote{We ignore the ghosts here because only the tree-level amplitudes are considered.}
@@ -181,11 +182,7 @@ the Lagrangian takes the form\sidenote{We ignore the ghosts here because only th
     \mathcal{L}=\Tr(-\frac{1}{2}\partial_\mu A_\nu \partial^\mu A^\nu-i\sqrt{2}g\partial^\mu A^\nu A_\nu A_\mu+\frac{g^2}{4}A^\mu A^\nu A_\nu A_\mu).
 \end{align}
 The Feynman rules then give a gluon propagator $\delta^{ab}\frac{\eta_{\mu\nu}}{p^2}$.
-The Feynman vertex rules for calculating the color-ordered amplitudes are:
-\begin{align}
-     & V^{\mu_1 \mu_2 \mu_3}(p_1,p_2,p_3)=\includegraphics[valign=c,width=1in]{fig/yang-mills/3point/3point.pdf}=-\sqrt{2}g\left(\eta^{\mu_1 \mu_2}p_1^{\mu_3}+\eta^{\mu_2 \mu_3}p_2^{\mu_1}+\eta^{\mu_3 \mu_1}p_3^{\mu_2}\right) \\
-     & V^{\mu_1 \mu_2 \mu_3 \mu_4}(p_1,p_2,p_3,p_4)=\includegraphics[valign=c,width=1in]{fig/yang-mills/4point/4point.pdf}=g^2 \eta^{\mu_1 \mu_3}\eta^{\mu_2 \mu_4}.
-\end{align}
+The 3- and 4-vertices involve group factors $\tilde{f}^{abc}$ and $\tilde{f}^{abe}\tilde{f}^{ecd}$.
 
 The amplitudes constructed from these rules can be organized into different group theory structures each dressed with a kinematic factor.
 For example, the \textit{color factors} of the \textit{s-}, \textit{t-}, and \textit{u-}channel diagram of the 4-gluon tree amplitude are
@@ -214,12 +211,12 @@ With the normalzation condition, We can write the color factors in terms of trac
 
 Products of traces can be simplified using the completeness relation
 \begin{align}
-    \tensor{\left(T^a\right)}{_i^j}\tensor{\left(T^a\right)}{_k^l}=\tensor{\delta}{_i^l}\tensor{\delta}{_k^j}-\frac{1}{N}\tensor{\delta}{_i^j}\tensor{\delta}{_k^l}.
+    \tensor{\left(T^a\right)}{_i^j}\tensor{\left(T^a\right)}{_k^l}=\tensor{\delta}{_i^l}\tensor{\delta}{_k^j}-\frac{1}{N_c}\tensor{\delta}{_i^j}\tensor{\delta}{_k^l}.
 \end{align}
 \begin{proof}
     123
 \end{proof}
-\begin{example}
+\begin{example}[4-gluon case]\leavevmode
     For the 4-gluon $s$-channel diagram we have
     \begin{align}
         \tilde{f}^{a_1 a_2 b}\tilde{f}^{b a_3 a_4}= & \Tr(T^{a_1}T^{a_2}T^{a_3}T^{a_4})-\Tr(T^{a_1}T^{a_2}T^{a_4}T^{a_3})\notag \\
@@ -239,33 +236,120 @@ The color-structure generalizes to any $n$-point tree-level amplitude involving 
 \end{align}
 where the sum is over the (overcomplete) trace-basis of $(n-1)!$ elements that takes into account the cyclic nature of the traces\sidenote{For loop-amplitudes, one also needs to consider multi-trace structures in addition to the simple single-trace.}.
 \begin{remark}
-    \begin{enumerate}
-        \item \Cref{fulltree} is a general result for all gauge groups.
-        \item The color-ordered amplitudes have a number of properties:
-        \begin{itemize}
-            \item \textit{Cyclic}: $A_n[12\dots n]=A_n[2\dots n1]$, etc.
-            \item \textit{Reflection}: $A_n[12\dots n]=(-1)^n A_n[n\dots 21]$.
-            \item The U(1) \textit{decoupling identity} (also known as \textit{Kleiss-Kuijf relation} or \textit{photon decoupling identity}):
-                  \begin{align}
-                      A_n[123\dots n]+A_n[213\dots n]+A_n[231\dots n]+\cdots+A_n[23\dots1n]=0.
-                  \end{align}
-            \item The color-ordered amplitudes are gauge invariant:
-            
-                  The single traces in \cref{fulltree} are linear independent\cite{Taylor:2017sph}.
-    
-                  The "linear independence" here means that there exists no non-trivial set of numbers $\{\alpha_i\}$ such that 
-                  \begin{align}
-                    \sum_{\sigma_i}\sum_{j=1}^{N^2-1} \alpha_j \Tr(T^{a_1}T^{\sigma_j(a_2}\cdots T^{a_n)})=0,
-                  \end{align}
-                  where the sum runs over all possible permutations $\sigma_i$.
-        \end{itemize}
-    \end{enumerate}
+    The form of the color-ordered amplitudes do not depend on the type of the gauge group.
 
+    \Cref{fulltree} is a general result for all gauge groups.
 \end{remark}
+
+The Feynman vertex rules for calculating the \textit{color-ordered} amplitudes\sidenote{Using this set of rules, we can write down the color-ordered amplitudes directly by putting the particles on external lines of the Feynman diagram in the corresponding color order and summing over all possible diagrams.} are:
+\begin{align}
+     & V^{\mu_1 \mu_2 \mu_3}(p_1,p_2,p_3)=\includegraphics[valign=c,width=1in]{fig/yang-mills/3point/3point.pdf}=-\sqrt{2}g\left(\eta^{\mu_1 \mu_2}p_1^{\mu_3}+\eta^{\mu_2 \mu_3}p_2^{\mu_1}+\eta^{\mu_3 \mu_1}p_3^{\mu_2}\right) \\
+     & V^{\mu_1 \mu_2 \mu_3 \mu_4}(p_1,p_2,p_3,p_4)=\includegraphics[valign=c,width=1in]{fig/yang-mills/4point/4point.pdf}=g^2 \eta^{\mu_1 \mu_3}\eta^{\mu_2 \mu_4}.
+\end{align}
+\begin{property}[Color-ordered amplitudes]\leavevmode
+              \begin{itemize}
+                  \item \textit{Gauge invarance}: the color-ordered amplitudes are gauge invariant.
+
+                        The single traces in \cref{fulltree} are linear independent\cite{Taylor:2017sph}.
+
+                        The "linear independence" here means that there exists no non-trivial set of numbers $\{\alpha_i\}$ such that
+                        \begin{align}
+                            \sum_{\sigma_i}\sum_{j=1}^{N_c^2-1} \alpha_j \Tr(T^{a_1}T^{\sigma_j(a_2}\cdots T^{a_n)})=0
+                        \end{align}
+                        holds for generators $\{T^i\}$ of any gauge group,
+                        where the sum runs over all possible permutations $\sigma_i$.
+                  \item \textit{Cyclic}: $A_n[12\dots n]=A_n[2\dots n1]$, etc.
+                  \item \textit{Reflection}: $A_n[12\dots n]=(-1)^n A_n[n\dots 21]$.
+
+                        See \cite{Taylor:2017sph} for a detailed discussion.
+                  \item The U(1) \textit{decoupling identity} (also known as \textit{Kleiss-Kuijf relation} or \textit{photon decoupling identity}):
+                        \begin{align}
+                            A_n[123\dots n]+A_n[213\dots n]+A_n[231\dots n]+\cdots+A_n[23\dots1n]=0.
+                        \end{align}
+
+                        Since \cref{fulltree} holds for any gauge group, if one of gauge bosons in the tree amplitude describing the scattering of $N$
+                        U($N_c$) gauge bosons is associated to the $T^0=I_{N_c}$, the U(1) subgroup generator of U($N_c$),
+                        the amplitude vanishes because $\tilde{f}_{0ab}=0$ for any color $a$ and $b$.
+                        In other words, this abelian gauge boson does not couple to gluons.
+                        Let's assume that it is the $N^{\text{th}}$ gauge boson.
+                        Then according to \cref{fulltree}, we have
+                        \begin{align}
+                            A^{\text{full,tree}}_{N} & =\begin{aligned}[t]
+                                g^{N-2}\sum_{\text{perms}\ \sigma} & A_N[12_\sigma\dots(N-1)_{\sigma}N]\Tr(T^1 T^{2_\sigma} \dots T^{(N-1)_\sigma} T^N)  \notag                \\
+                                +                                  & A_{N}[12_\sigma\dots N(N-1)_\sigma]\Tr(T^1 T^{2_\sigma} \dots T^{N} T^{(N-1)_\sigma})             \notag  \\
+                                                                   & \dots                                                                                              \notag \\
+                                +                                  & A_{N}[1N2_\sigma\dots (N-1)_\sigma]\Tr(T^1 T^N T^{2_\sigma}\dots  T^{(N-1)_\sigma})  \notag
+                            \end{aligned} \\
+                                                     & \begin{aligned}[t]
+                                = g^{N-2}\sum_{\text{perms}\ \sigma} & \left(A_N[12_\sigma\dots(N-1)_{\sigma}N]\Tr(T^1 T^{2_\sigma} \dots T^{(N-1)_\sigma} )\right.       \notag \\
+                                +                                    & A_{N}[12_\sigma\dots N(N-1)_\sigma]\Tr(T^1 T^{2_\sigma} \dots  T^{(N-1)_\sigma})                  \notag  \\
+                                                                     & \dots                                                                                              \notag \\
+                                +                                    & \left.A_{N}[1N2_\sigma\dots (N-1)_\sigma]\Tr(T^1 T^{2_\sigma}\dots  T^{(N-1)_\sigma})\right)      \notag  \\
+                            \end{aligned}  \\
+                                                     & \begin{aligned}[t]
+                                = g^{N-2}\sum_{\text{perms}\ \sigma}  \Tr(T^1 T^{2_\sigma}\dots  T^{(N-1)_\sigma}) & \left(A_N[12_\sigma\dots(N-1)_{\sigma}N]\right.       \notag       \\
+                                +                                                                                  & A_{N}[12_\sigma\dots N(N-1)_\sigma]                         \notag \\
+                                                                                                                   & \dots                                          \notag              \\
+                                +                                                                                  & \left.A_{N}[1N2_\sigma\dots (N-1)_\sigma]\right)        \notag     \\
+                            \end{aligned}  \\
+                                                     & =0.\notag
+                        \end{align}
+                        Since the traces are linear independent, we have
+                        \begin{align}
+                             & A_N[12\dots(N-1)N]+A_{N}[12\dots N(N-1)]+\dots+A_{N}[1N2\dots (N-1)]\notag \\
+                             & =0.\notag
+                        \end{align}
+              \end{itemize}
+\end{property}
+
+The trace-basis in \cite{Taylor:2017sph} is overcomplete and that implies that there are further linear relations among the \textit{partial tree-level} amplitudes:
+these are called the \textbf{Kleiss-Kuijf relations (KK relations)}\cite{Kleiss:1988ne}\cite{DelDuca:1999rs} and they can be written\cite{Bern:2008qj}
+\begin{align}\label{kk}
+    A_{n}[1,\{\alpha\},n,\{\beta\}]=(-1)^{\abs{\beta}}\sum_{\sigma\in\text{OP}(\{\alpha\},\{\beta^T\})}A_n[1,\sigma,n],
+\end{align}
+where $\{\beta^T\}$ denotes the reverse ordering of the labels $\{\beta\}$ and the sum is over ordered permutations "OP",
+namely permutations of the labels in the joined set $\{\alpha\}\cup\{\beta^T\}$ such that the ordering within $\{\alpha\}$ and $\{\beta^T\}$ is preserved.
+$\abs{\beta}$ is the number of elements in $\{\beta\}$.
+\begin{example}[5-point color-ordered amplitude]
+    Take the LHS of \cref{kk} to be $A_5[1,\{2\},5,\{3,4\}]$, we have $\{\alpha\}\cup\{\beta^T\}=\{2\}\cup\{4,3\}$,
+    so the sum over ordered permutations is over $\sigma=\{243\},\{423\},\{432\}$.
+    Thus the Kleiss-Kuijf relation reads
+    \begin{align}
+        A_5[12534]=A_5[12435]+A_5[14235]+A_5[14325].
+    \end{align}
+\end{example}
+\begin{remark}
+    The Kleiss-Kuijf relations combine with the cyclic, reflection, and U(1) decoupling identities to reduce the number independent $n$-gluon tree amplitudes to $(n-2)!$.
+
+    There are further linear relationships, called the (fundamental) \textbf{BCJ relations}\cite{Bern:2008qj}
+    that reduce the number of independent $n$-gluon color-ordered tree amplitudes to $(n-3)!$.
+\end{remark}
+
 
 \clearpage
 
+\section{Little Group Scaling}
+
+\clearpage
+\section{On-shell Recursion Relations at Tree-level}
+
+\subsection{Complex Shifts and Cauchy's Theorem}
+
+\subsection{BCFW Recursion Relations}
+
+\clearpage
+\section{Supersymmetry}
+
+\clearpage
+\section{Symmetries of \texorpdfstring{{}$\mathcal{N}=4$}{} SYM}
+
+
+\clearpage
+
+
+
 \part{Loops}
+
 \section{Loop Amplitudes and Generalized Unitarity}
 In general, an $L$-loop amplitude can be written \textit{schematically} as
 \begin{align}
@@ -285,6 +369,118 @@ In this context, the planar limit means that the amplitudes have only one trace-
 They are called \textit{planar amplitudes}.
 
 \clearpage
+\section{Unitarity Method}
+
+\clearpage
+
+\part{Topics}
+\section{Supergravity Amplitudes}
+\subsection{Perturbative Gravity}
+The Einstein equation $G_{\mu\nu}=8\pi T_{\mu\nu}$, is the classical equation of motion that follows from the variational principle applied to the \textit{Einstein-Hilbert action}
+\begin{align}\label{ehaction}
+    S_{\text{EH}}=\frac{1}{2\kappa^2}\int\dd[D]{x}\sqrt{-g}R+S_{\text{matter}},
+\end{align}
+where $R$ is the Ricci scalar and $2\kappa^2=16\pi G_N$.
+We have written the action in $D$ spacetime dimensions with a $D$-dimensional Newton's constant $G_N$.
+The metric $g_{\mu\nu}$ is a field in the field theory described by \cref{ehaction}.
+The varition $\delta g_{\mu\nu}$ of $\sqrt{-g}R$ gives the Einstein tensor part, $G_{\mu\nu}=R_{\mu\nu}-\frac{1}{2}g_{\mu\nu}R$, of Einstein's equation,
+while the metric variation of the "matter" action $S_{\text{matter}}$ gives the stress-tensor part, $T_{\mu\nu}=\frac{2}{\sqrt{-g}}\fdv{S_{\text{matter}}}{g^{\mu\nu}}$.
+In the following, we use the term \textbf{pure gravity} to describe the field theory \cref{ehaction} without matter fields, $S_{\text{matter}}=0$.
+
+We will consider the quantization of the metric field $g_{\mu\nu}$ in the flat spacetime.
+To be specific, we expand the gravitational field around flat spacetime $g_{\mu\nu}=\eta_{\mu\nu}+\kappa h_{\mu\nu}$ and regard the fluctuating field $h_{\mu\nu}$ as the \textbf{graviton field}.
+
+Suppressing the increasingly intricate index-structure, we write these terms schematically as $h^{n-1}\partial^2 h$ for $n=2,3,4\dots$, so that the action \cref{ehaction} becomes
+\begin{align}\label{ehexpand}
+    S_{\text{EH}}=\int\dd[D]{x}\left[h\partial^2h+\kappa h^2 \partial^2 h+\kappa^2 h^3\partial^2 h+\kappa^3 h^4\partial^2 h+\dots\right].
+\end{align}
+There are infinitely many terms and no mass terms in \cref{ehexpand}.
+So the particles associated with quantization of the gravitational field $h_{\mu\nu}$ are massless and have spin-2, which are called \textbf{gravitons}.
+
+It typical to use the \textit{de Donder gauge}, $\partial^\mu h_{\mu\nu}=\frac{1}{2}\partial_\nu \tensor{h}{_\mu^\mu}$, to extract Feynman rules from \cref{ehexpand}, which brings the quadratic terms in the action to the form
+\begin{align}
+    h\partial^2 h\to-\frac{1}{2}h_{\mu\nu}\Box h^{\mu\nu}+\frac{1}{4}\tensor{h}{_\mu^\mu}\Box \tensor{h}{_\nu^\nu}.
+\end{align}
+\lec{Feynman rules}{graviton}The propagator resulting from these quadratic terms is
+\begin{align}
+    P_{\mu_1\nu_1,\mu_2\nu_2}=-\frac{i}{2}\left(\eta_{\mu_1\mu_2}\eta_{\nu_1\nu_2}+\eta_{\mu_1\nu2}\eta_{\nu_1\mu_2}-\frac{2}{D-2}\eta_{\mu_1\nu_1}\eta_{\mu_2\nu_2}\right)\frac{1}{k^2},
+\end{align}
+where $k$ is the momentum on the propagator.
+
+External lines can be constructed as products of the spin-1 polarization vectors
+\begin{align}
+    e^{\mu\nu}_-(p_i)=\epsilon^\mu_-(p_i)\epsilon^\nu_+(p_i)\qq{and}e^{\mu\nu}_+(p_i)=\epsilon^\mu_+(p_i)\epsilon^\nu_-(p_i).
+\end{align}
+The infinite set of 2-derivative interaction terms $h^{n-1}\partial^2 h$ yields Feynman rules for $n$-graviton vertices for \textit{any} $n=3,4,5,\dots$.
+For example, the de Donder gauge 3-vertex takes the form
+\begin{align}
+    V_3(p_1,p_2,p_3)=p^{\mu_3}_1p^{\nu_3}_2\eta^{\mu_1 \nu_2}\eta^{\mu_2\nu_1}+(\text{many other terms with various index-structures}).
+\end{align}
+Feynman rules of graviton are too complicated to show here.
+For the detailed discussion, see \cite{DeWitt:1967yk}\cite{DeWitt:1967ub}\cite{DeWitt:1967uc}\cite{Veltman:1975vx}.
+
+Because of the extremely complicated Feynman rules, it is even nearly impossible to calculate the graviton amplitudes to tree-level using Feynman diagrams.
+In \cite{Kawai:1985xq}, the 4-point graviton tree amplitude was calculated brute force with Feynman diagrams where each of the four contributing Feynman diagrams fill about a page or so.
+Nonetheless, the final result can be brought to a very simple form:  in 4D, it can be written in spinor helicity formalism as\sidenote{Note that we will be using $M_n$ to denote (super)gravity amplitudes to distinguish them from (super)Yang-Mills amplitudes $A_n$.}
+\begin{align}
+    M^{\text{tree}}_4\left(1^-2^-3^+4^+\right)=\frac{\langle12\rangle^7[12]}{\langle13\rangle\langle14\rangle\langle23\rangle\langle24\rangle\langle34\rangle^2}=\frac{\langle12\rangle^4[34]^4}{stu}.
+\end{align}
+
+\begin{intu}
+    Little group scaling fixes the possible 3-graviton amplitudes and recursion then allows us to compute all other tree-level graviton processes.
+    Loop-level amplitudes can be constructed with unitarity techniques. 
+    Thus the infinite set of interaction terms in the Lagrangian is not needed from the point of view of the on-shell scattering amplitudes.
+\end{intu}
+
+In the $D=4$ case, dimensional analysis and little group scaling fix the 3-point graviton amplitudes to be
+\begin{align}
+    &M_3(1^-2^-3^+)=\frac{\langle12\rangle^6}{\langle23\rangle^2\langle31\rangle^2}=A_3[1^-2^-3^+]^2\\
+    &M_3(1^+2^+3^-)=\frac{[12]^6}{[23]^2[31]^2}=A_3[1^+2^+3^-]^2.
+\end{align}
+
+Using BCFW recursion relations, relatively compact graviton amplitudes can be found for the MHV sector
+\begin{align}
+    &M_n^{\text{tree}}(1^-2^-3^+\dots n^+)\notag\\
+    &=\sum_{P(3,4,\dots,n-1)}\frac{\langle12\rangle^8\prod_{l=3}^{n-1}\langle n|2+3+\cdots+(l-1)|l]}{\left(\prod_{i=1}^{n-2}\langle i,i+1\rangle\right)\langle 1,n-1\rangle\langle1n\rangle^2\langle2n\rangle^2\left(\prod_{l=3}^{n-1}\langle ln\rangle\right)}.
+\end{align}
+The sum is over all permutations of labels $(3,4,\dots,n-1)$.
+
+Another form of the same MHV graviton tree amplitude expresses $M^{\text{tree}}_n$ in terms of color-ordered gluon amplitudes $A^{\text{tree}}_n$ of Yang-Mills theory
+\begin{align}\label{mhvgraviton}
+    M_n^{\text{tree}}(1^-2^-3^+\dots n^+)=\sum_{P(i_3,i_4,\dots,i_n)}s_{1i_n}\left(\prod^{n-1}_{k=4}\beta_k\right)A^{\text{tree}}_n\left[1^-2^- i_3^+ i_4^+\dots i_n^+\right]^2,
+\end{align}
+where $n\geq 4$ and 
+\begin{align}
+    \beta_k=-\frac{\langle i_k i_{k+1}\rangle}{\langle 2 i_{k+1}\rangle}\langle2|i_3+i_4+\cdots+i_{k-1}|i_k].
+\end{align}
+\Cref{mhvgraviton} shows that the amplitudes of gravitons and gauge theory are closely related.
+The first such example is the \textbf{KLT relations}\cite{Kawai:1985xq}.
+For $n=4$ and $5$ the KLT relations are
+\begin{align}
+    M^{\text{tree}}_4(1234)&=-s_{12}A^{\text{tree}}_4[1234]A^{\text{tree}}_4[1243]\label{kltexample1}\\
+    M^{\text{tree}}_5(12345)&=s_{23}s_{45}A^{\text{tree}}_5[12345]A^{\text{tree}}_{5}[13254]+(3\leftrightarrow4).\label{kltexample2}
+\end{align}
+More KLT relations can be found in \cite{Bern:1998sv}.
+\begin{remark}
+    There is no specification of helicities of the external states in KLT relations \cref{kltexample1} and \cref{kltexample2} because the KLT relations are valid in $D$-dimensions.
+    In 4d, the KLT relations work for any helicity assignments of the gravitons on the LHS;
+    if the $i$th graviton has helicity $h_i=+2$, then the gluons labeled $i$ in the amplitudes on the RHS have helicity $h_i=+1$; similarly for negative helicity.
+\end{remark}
+We may then say that KLT in 4d uses
+\begin{align}
+    \text{graviton}^{\pm2}(p_i)=\text{gluon}^{\pm1}(p_i)\otimes\text{gluon}^{\pm1}(p_i).
+\end{align}
+
+
+\subsection{Supergravity}
+
+\clearpage
+\section{Color-kinematic Duality}
+\subsection{The Color-structure of Yang-Mills Theory}
+
+
+
+\clearpage
 
 \appendix
 \section{Conventions\label{convention}}
@@ -295,33 +491,33 @@ We use a mostly-plus metric, $\eta_{\mu\nu}=\text{diag}(-1,+1,+1,+1)$ and define
 with Pauli matrices
 \begin{align}
     \sigma^{1}=\begin{pmatrix}
-                   0 & 1 \\
-                   1 & 0
-               \end{pmatrix},\quad
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix},\quad
     \sigma^{2}=\begin{pmatrix}
-                   0 & -i \\
-                   i & 0
-               \end{pmatrix},\quad
+        0 & -i \\
+        i & 0
+    \end{pmatrix},\quad
     \sigma^{3}=\begin{pmatrix}
-                   1 & 0  \\
-                   0 & -1
-               \end{pmatrix}.
+        1 & 0  \\
+        0 & -1
+    \end{pmatrix}.
 \end{align}
 Two-index spinor indices are raised/lowered using
 \begin{align}
     \epsilon^{ab}=\epsilon^{\dot{a}\dot{b}}=\begin{pmatrix}
-                                                0  & 1 \\
-                                                -1 & 0
-                                            \end{pmatrix}=-\epsilon_{ab}=-\epsilon_{\dot{a}\dot{b}},
+        0  & 1 \\
+        -1 & 0
+    \end{pmatrix}=-\epsilon_{ab}=-\epsilon_{\dot{a}\dot{b}},
 \end{align}
 which obey $\epsilon_{ab}\epsilon^{bc}=\delta^{c}_{a}$.
 
 Define $\gamma$-matrices:
 \begin{align}
     \gamma^\mu=\begin{pmatrix}
-                   0                                          & \left(\sigma^\mu\right)_{a\dot{b}} \\
-                   \left(\bar{\sigma}^{\mu}\right)^{\dot{a}b} & 0
-               \end{pmatrix},\quad\quad
+        0                                          & \left(\sigma^\mu\right)_{a\dot{b}} \\
+        \left(\bar{\sigma}^{\mu}\right)^{\dot{a}b} & 0
+    \end{pmatrix},\quad\quad
     \left\{\gamma^\mu,\gamma^\nu\right\}=-2\eta^{\mu\nu},
 \end{align}
 and
@@ -329,9 +525,16 @@ and
     \gamma_5\equiv i\gamma^0\gamma^1\gamma^2\gamma^3,\quad\quad P_L=\frac{1}{2}(1-\gamma_5),\quad\quad P_R=\frac{1}{2}(1+\gamma_5).
 \end{align}
 
-\clearpage
 
 
+
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{References}
 \bibliographystyle{jhep}
 \bibliography{ref}
+
+
+
 \end{document}

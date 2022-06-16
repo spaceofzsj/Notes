@@ -3,6 +3,7 @@
 \usepackage{orcidlink}
 \usepackage{tensor}
 \usepackage{cleveref}
+\usepackage{thmtools}
 
 
 \let\oldsection\section
@@ -12,6 +13,7 @@
 }
 
 \newcommand{\me}{\mathrm{e}}
+\DeclareMathOperator{\im}{im}
 
 
 \begin{document}
@@ -24,17 +26,77 @@
 
 \maketitle
 
+\listoftheorems[title={List of Definitions},ignoreall,onlynamed={definition},swapnumber]
+\listoftheorems[ignoreall,onlynamed={theorem},swapnumber]
+\clearpage
+
 \section{Mathematical Preliminaries}
 \subsection{Maps}
+\subsubsection{Definitions}
+\subsubsection{Equivalence Relation and Equivalence Class}
+\begin{definition}[Equivalence relation]
+    An equivalence relation $\sim$ is a relation which satisfies the following requirements
+    \begin{enumerate}
+        \item \textit{reflective}: $a\sim a$.
+        \item \textit{symmetric}: If $a\sim b$, then $b\sim a$.
+        \item \textit{transitive}: If $a\sim b$ and $b\sim c$, then $a\sim c$.
+    \end{enumerate}
+\end{definition}
 \subsection{Vector Spaces}
+\subsubsection{Vectors and Vector Spaces}
+\begin{definition}[Vector space]
+    A \textbf{vector space} (or a \textbf{linear space}) $V$ over a field $K$ is a set in which two operations, addition and multiplication by an element of $K$ (called a \textbf{scalar}),
+    are defined (In this notes we are mainly interested in $K=\mathbb{R}$ and $\mathbb{C}$).
+    The elements of $V$ (called \textbf{vectors}) satisfy the following axioms:
+    \begin{enumerate}
+        \item $\vb*{u}+\vb*{n}=\vb*{v}+\vb*{u}$.
+        \item $(\vb*{u}+\vb*{v})+\vb*{w}=\vb*{u}+(\vb*{v}+\vb*{w})$.
+        \item There exists a zero vector $\vb*{0}$ such that $\vb*{v}+\vb*{0}=\vb*{v}$.
+        \item For any $\vb*{u}$, there exists $-\vb*{u}$, such that $\vb*{u}+(-\vb*{u})=0$.
+        \item $c(\vb*{u}+\vb*{v})+c\vb*{u}+c\vb*{v}$.
+        \item $(cd)\vb*{u}=c(d\vb*{u})$.
+        \item $1 \vb*{u}=\vb*{u}$.
+    \end{enumerate}
+    Here $\vb*{u}, \vb*{v}, \vb*{w}$ and $c,d\in K$ and $1$ is the unit element of $K$.
+\end{definition}
+\subsubsection{Linear Maps, Images and Kernels}
+\begin{theorem}
+    If $f:V\to W$ is a linear map, then
+    \begin{align}
+        \dim{V}=\dim(\ker{f})+\dim(\im f).
+    \end{align}
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+
+\subsubsection{Dual Vector Space}
+
+\subsubsection{Inner Product and Adjoint}
+\begin{theorem}[Toy index theorem]
+    Let $V$ and $W$ be finite-dimensional vector spaces over a field $K$ and let $f:V\to W$ be a linear map.
+    Then
+    \begin{align}
+        \dim\ker f-\dim\ker\tilde{f}=\dim V-\dim W.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+
+\subsubsection{Tensors}
+
 \subsection{Topological Spaces}
+\subsubsection{Definitions}
 \subsection{Homeomorphisms and Topological Invariants}
 \subsubsection{Homeomorphisms}
-The purpose of topology is to classify spaces.
+\begin{intu}
+    The purpose of topology is to classify spaces.
+\end{intu}
 
 For example, in elementary geometry, the equivalence of figures is given by congruence, which turns out to be too stringent for our purpose.
 In topolgy, we define two figures to be equivalent if it is possible to deform one figure into the other by \textit{continuous deformation}.
-\begin{definition}\label{homeomorphism}
+\begin{definition}[Homeomorphism]\label{homeomorphism}
     Let $X_1$ and $X_2$ be topological spaces.
     A map $f : X_{1}\to X_{2}$ is a \textbf{homeomorphism} if it is continuous and has an inverse $f^{-1}:X_{2}\to X_{1}$ which is also continuous.
     If there exists a homeomorphism between $X_1$ and $X_2$ , $X_1$ is said to be \textbf{homeomorphic} to $X_2$ and vice versa.
@@ -64,17 +126,19 @@ If two spaces are homeomorphic to each other,they have the same "topological inv
 And if two spaces have different "topological invariants",they are not homeomorphic to each other.
 
 \subsubsection{Homotomy type}
+\begin{intu}
 The condition of homeomorphism is too restrict, we will see it would be useful to define a new equivalent class, namely of the \textit{same homotopy type}.
+\end{intu}
 
 Just relax the condition in \cref{homeomorphism} so that the continuous functions $f$ and $g$ need not have inverses.
 
 \subsubsection{Euler Characteristic: An Example}
 In this section, We focus on $\mathbb{R}^3$.
-\begin{definition}
+\begin{definition}[Euler characteristic]
     Let $X$ be a subset of $\mathbb{R}^3$, which is homeomorphic to a polyderon $K$.
     Then the \textbf{Euler characteristic} $\chi(X)$ of $X$ is defined by
     \begin{align}
-        \chi(X)= & (\text{number of verticies in}\ K)-(\text{number of edges in}\ K) \\
+        \chi(X)= & (\text{number of verticies in}\ K)-(\text{number of edges in}\ K)\notag \\
                  & +(\text{number of faces in}\ K)
     \end{align}
 \end{definition}
@@ -110,14 +174,47 @@ An immediate generalization is
 While compactness and connectedness are geometrical properties of a figure or a space $X$, the Euler characteristic is a integer $\chi(X)\in\mathbb{Z}$, which is algebraic.
 It implies that the Euler characteristic can relate geometry to algebra\sidenote{We may compute the Euler characteristic of a smooth surface with \textit{Gauss-Bonnet theorem}.}.
 
-
+\clearpage
 \section{Homology Groups}
 \subsection{Abelian Groups}
+\subsubsection{Elementary Group Theory}
+
+\begin{theorem}[Fundamental Theorem of Homomorphism]
+    Let $f:G_1\to G_2$ be a homomorphism. Then
+    \begin{align}
+        G_1/\ker f\cong \im f.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+
+\subsubsection{Finitely Generated Abelian Groups and Free Abelian Groups}
+\begin{definition}[Free abelian group]
+    If $G$ is finitely generated by $r$ \textit{linearly independent} elements, $G$ is called a \textbf{free Abelian group} of \textbf{rank} $r$.
+\end{definition}
+
+\subsubsection{Cyclic Groups}
+    
+\begin{theorem}[Fundamental theorem of finitely generated Abelian groups]
+    Let $G$ be a finitely generated Abelian group (not necessarily free) with $m$ generators. 
+    Then $G$ is isomorphic to the direct sum of cyclic groups,
+    \begin{align}
+        G\cong\mathbb{Z}\oplus\cdots\oplus\mathbb{Z}\oplus\mathbb{Z}_{k_1}\oplus\cdots\oplus\mathbb{Z}_{k_p}
+    \end{align}
+    where $m=r+p$. 
+    The number $r$ is called the \textbf{rank} of $G$.
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+
+
 \subsection{Simplexes and Simplicial Complexes}
 \subsection{Homology Groups of Simplicial Complexes}
 \subsection{General Properties of Homology Groups}
 
-
+\clearpage
 \section{Homotopy Groups}
 \subsection{Fundamental Groups}
 \subsection{General Properties of Fundamental Groups}
@@ -128,45 +225,46 @@ It implies that the Euler characteristic can relate geometry to algebra\sidenote
 \subsection{Examples of Higher Homotopy Groups}
 \subsection{Orders in Condensed Matter Systems}
 \subsubsection{Order Parameter}
-\textbf{Spontaneous symmetry breakdown}: Assume the the hamiltonian of a system $H$ is invariant under a certain symmetry operation.  
+\textbf{Spontaneous symmetry breakdown}: Assume the the hamiltonian of a system $H$ is invariant under a certain symmetry operation.
 The ground state of the system need not preserve the symmetry of $H$.
-\begin{example}[Heisenberg Hamiltonian]
+\begin{example}[Heisenberg hamiltonian]
+    The Heisenberg hamiltonian is
     \begin{align}
         H=-J\sum_{(i,j)}\vec{S}_i\cdot\vec{S}_j+\vec{h}\cdot\sum_i \vec{S}_i.
     \end{align}
     Note that we are talking about quantum mechanics so $H$ here is an operator.
 
-    The $\vec{S}_i$ are ferromagnetic Heisenberg spins and $J=\text{const}>0$. 
+    The $\vec{S}_i$ are ferromagnetic Heisenberg spins and $J=\text{const}>0$.
     The summation is over the pair of the nearest-neighbour sites $(i,j)$ and $\vec{h}$ is the uniform external magnetic field.
-    
-    The \textit{partition function} is $Z\equiv\Tr\left(\text{e}^{-\beta H}\right)=\sum_i \me^{-\beta E_i}$ where $\beta=1/T$ is the inverse temperature and $E_i$ are eigenvalues of $H$. 
-    The \textit{free energy} is defined by $\exp(-\beta F)=Z$. 
+
+    The \textit{partition function} is $Z\equiv\Tr\left(\text{e}^{-\beta H}\right)=\sum_i \me^{-\beta E_i}$ where $\beta=1/T$ is the inverse temperature and $E_i$ are eigenvalues of $H$.
+    The \textit{free energy} is defined by $\exp(-\beta F)=Z$.
     The average magnetization per spin is defined as:
     \begin{align}
         \vec{m}\equiv\frac{1}{N}\sum_{i}\langle\vec{S}_i\rangle=\frac{1}{N\beta}\frac{\partial F}{\partial \vec{h}},
     \end{align}
     where $\langle\dots\rangle\equiv\Tr(\dots \text{e}^{-\beta H})/Z$ can be interpreted to be the expectation value.
 
-    In the limit $\vec{h}\rightarrow 0$ ($H\rightarrow -J\sum_{(i,j)}\vec{S}_i\cdot\vec{S}_j$), $H$ is invariant under $\text{SO}(3)$ but $\vec{m}$ doesn't vanish because of the ferromagnetism. 
+    In the limit $\vec{h}\rightarrow 0$ ($H\rightarrow -J\sum_{(i,j)}\vec{S}_i\cdot\vec{S}_j$), $H$ is invariant under $\text{SO}(3)$ but $\vec{m}$ doesn't vanish because of the ferromagnetism.
     It is said that the system exhibits \textbf{spontaneous magnetization}.
 
     In this example, the vector $\vec{m}$ is called the \textbf{order parameter} describing the phase transition between the ordered state and the disordered state.
 \end{example}
 The free energy of a system is defined by
 \begin{align}
-    F=\langle H\rangle-TS,    
+    F=\langle H\rangle-TS,
 \end{align}
 $S$ is entropy and equilibrium is obtained by minimizing $F$.
 
-When temperature is low, $F\approx\langle H\rangle$. 
+When temperature is low, $F\approx\langle H\rangle$.
 All $S_i$ align in the same direction.
-When temperature is high, $F\approx-TS$. 
+When temperature is high, $F\approx-TS$.
 All $S_i$ are totally random.
 
-In the Heisenberg Hamiltonian example, when the temperature is uniform, $\abs{\vec{m}(\vec{x})}$ is constant so $\vec{m}$ can be characterized by polar coordinates $(\theta,\phi)$ on $S^2$. 
+In the Heisenberg Hamiltonian example, when the temperature is uniform, $\abs{\vec{m}(\vec{x})}$ is constant so $\vec{m}$ can be characterized by polar coordinates $(\theta,\phi)$ on $S^2$.
 Now we have a map $\vec{m}: \vec{x}\to\vec{m}(\vec{x})$ or $\mathbb{R}^3\rightarrow S^2$.
 
-The excited states of this system depend on this map $\vec{m}$ (in other systems, the order parameter may be not a vector). 
+The excited states of this system depend on this map $\vec{m}$ (in other systems, the order parameter may be not a vector).
 Now we make a generalization to all systems that these kinds of excitation depends on the topological arguments are called \textbf{topological excitations}.
 
 \subsubsection{Superfluid \texorpdfstring{{}$^4\text{He}$}{} and superconductors}
@@ -182,32 +280,32 @@ In the BCS theory of superconductors, the order parameter is given by:
 We can see that the order parameter may even not be a scalar.
 
 \subsubsection{General Consideration}
-The order parameter of a 3D superconductor is $\psi(x)=\Delta_0(\vec{x})\text{e}^{i\phi(\vec{x})}$. 
-When a homogeneous system is under uniform external conditions, $\Delta_0$ is a constant. 
+The order parameter of a 3D superconductor is $\psi(x)=\Delta_0(\vec{x})\text{e}^{i\phi(\vec{x})}$.
+When a homogeneous system is under uniform external conditions, $\Delta_0$ is a constant.
 So $\psi(x)\cong\text{U(1)}$.
 
-We call the collection of order parameter values the \textbf{order parameter space} $M$. 
+We call the collection of order parameter values the \textbf{order parameter space} $M$.
 For superconductor, $M=\text{U(1)}$ and for nematic liquid crystal $M=\mathbb{R}P^2$.
 
 There are cases that the order parameter takes value outside $M$ (inhomogeneous state), but we still assume order parameters take value in $M$ when the scale of the system is large enough.
 
-However, there are also some points, lines or surfaces where the order parameters may not be defined uniquely. 
+However, there are also some points, lines or surfaces where the order parameters may not be defined uniquely.
 We call them \textbf{point defects (monopoles), line defects (vortices) and surface defects (domain walls)}.
 
 Consider a system, the order parameter is a classical field $\psi(x)$ and it can be regarded as a map $\psi:X\to M$.
 
-Imagine there is a line defect. 
-We enclose it by a circle $S^1$ and pick a reference point $x_0$ on it. 
-Thus, we just defined a loop $S^1\to M$. 
+Imagine there is a line defect.
+We enclose it by a circle $S^1$ and pick a reference point $x_0$ on it.
+Thus, we just defined a loop $S^1\to M$.
 Recall from the homotopy group, we can now classify this loop according to the homotopy class they belong to.
 
-For example, for superconductor $M=\text{U(1)}$ and $\pi_1\left(\text{U(1)},x_0\right)\cong\mathbb{Z}$. 
+For example, for superconductor $M=\text{U(1)}$ and $\pi_1\left(\text{U(1)},x_0\right)\cong\mathbb{Z}$.
 So it's possible to assign an integer to each loop and we call it the \textbf{winding number} of the loop.
 
-We can also generlize to other kinds of defects. 
+We can also generlize to other kinds of defects.
 Just pick a sphere $S^n$ which surrounds the defect and classify this sphere by homotopy classes or $\pi_n(M,x_0)$.
 \begin{remark}
-    Assume there is an $m$-dimensional defect $A$ in $X$. 
+    Assume there is an $m$-dimensional defect $A$ in $X$.
     If we can find an $n$-dimensional sphere $S^n$ which crosses the defect when continuously shrink to a point $S^0$ in any way, then we say this sphere surrounds $A$.
 \end{remark}
 
@@ -218,19 +316,19 @@ In general, an $m$-dimensional defect in a $d$-dimensional medium is classified 
 
 \subsection{Defects in Nematic Liquid Crystals}
 \subsubsection{Order Parameter of Nematic Liquid Crystals}
-An example of nematic liquid crystal is \textit{octyloxy-cyanobiphenyl} whose molecule looks like a rod and the order parameter of it is \textbf{director} which is given by the average direction of the "rod". 
+An example of nematic liquid crystal is \textit{octyloxy-cyanobiphenyl} whose molecule looks like a rod and the order parameter of it is \textbf{director} which is given by the average direction of the "rod".
 
 The director has an inversion symmetry which means we can not distinguish the directors $\vec{n}=\rightarrow$ and $-\vec{n}=\leftarrow$, so the order parameter lives in the \textbf{projective plane} $\mathbb{R}P^2$.
 
-The director in general depends on the position $\vec{r}$. 
+The director in general depends on the position $\vec{r}$.
 Then we may define a map $f:\mathbb{R}^3\to\mathbb{R}P^2$ and this map is called the \textbf{texture}.
 
 \subsubsection{Line Defects in Nematic Liquid Crystals}
-From the fact that $\pi_1(\mathbb{R}P^2)\cong\mathbb{Z}_2=\{0,1\}$, there exist two kind of line defect in the nematic liquid crystals; 
+From the fact that $\pi_1(\mathbb{R}P^2)\cong\mathbb{Z}_2=\{0,1\}$, there exist two kind of line defect in the nematic liquid crystals;
 one can be continuously deformed into a uniform configuration while the other cannot.
 \begin{remark}[continuous deformation]
-    Take $M=\mathbb{R}P^2$ as an example. 
-    Denote the initial distribution is A$(\vec{r})$. 
+    Take $M=\mathbb{R}P^2$ as an example.
+    Denote the initial distribution is A$(\vec{r})$.
     We say $A(\vec{r})$ can be continuously deformed into if there exists an \textit{continuous map} $f:\mathbb{R}^3\times I\to\mathbb{R}P^2$ where $f$ satisfies:
     \begin{enumerate}
         \item $f(\vec{r},0)=A(\vec{r})$,
@@ -239,41 +337,41 @@ one can be continuously deformed into a uniform configuration while the other ca
 \end{remark}
 
 \subsubsection{Point Defects in Nematic Liquid Crystals}
-A line defect and a point defect may be (\textit{when the line defect is "closed"})conbined into a \textbf{ring defect}. 
+A line defect and a point defect may be (\textit{when the line defect is "closed"})conbined into a \textbf{ring defect}.
 
 \subsubsection{Higher Dimensional Texture}
-After choosing a \textit{standard director} $\vec{n}_0$, a director $\vec{n}$ at any position can be characterized by a 3-dimensional rotation $R(\vec{e},\alpha)\in\text{SO(3)}$: $\vec{n}=R(\vec{e},\alpha)\vec{n}_0$. 
+After choosing a \textit{standard director} $\vec{n}_0$, a director $\vec{n}$ at any position can be characterized by a 3-dimensional rotation $R(\vec{e},\alpha)\in\text{SO(3)}$: $\vec{n}=R(\vec{e},\alpha)\vec{n}_0$.
 
-An arbitrary rotation in $\mathbb{R}^3$ is specified by a unit vector $\vec{e}$, around which the rotation is carried out, and the rotation angle $\alpha$. 
-It is possible to assign a "vector" $\vec{\Omega}=\alpha \vec{e}$ to the rotation. 
-It is not exactly a vector since $\Omega =\pi\vec{e}$ and $-\Omega=-\pi\vec{e}$ are the same rotation and hence should be identified. 
+An arbitrary rotation in $\mathbb{R}^3$ is specified by a unit vector $\vec{e}$, around which the rotation is carried out, and the rotation angle $\alpha$.
+It is possible to assign a "vector" $\vec{\Omega}=\alpha \vec{e}$ to the rotation.
+It is not exactly a vector since $\Omega =\pi\vec{e}$ and $-\Omega=-\pi\vec{e}$ are the same rotation and hence should be identified.
 Therefore, $\vec{\Omega}$ belongs to the real projective space $\mathbb{R}P^3$.
 
 \subsection{Textures in Superfluid \texorpdfstring{{}$^3\text{He-A}$}{}}
 \subsubsection{Superfluid \texorpdfstring{{}$^3\text{He-A}$}{}}
-Order parameter of $^4$He-A is 
+Order parameter of $^4$He-A is
 \begin{align}
     A_{\mu i}=d_\mu (\vec{\Delta}_1+i\vec{\Delta}_2)_i
 \end{align}
 where $\vec{d}$ is a unit vector along which the spin projection of the Cooper pair vanishes and $\left(\vec{\Delta}_1,\vec{\Delta}_2\right)$ is a pair of orthonormal unit vectors.
 
-If we define $\vec{l}\equiv\vec{\Delta}_1\times\vec{\Delta}_2$, the triad $(\vec{\Delta}_1,\vec{\Delta}_2,\vec{l})$ forms an orthonormal frame at each point of the medium. 
-Since any orthonormal frame can be obtained from a standard orthonormal frame $(\vec{e}_1,\vec{e}_2,\vec{e}_3)$ by an application of a three-dimensional rotation matrix. 
+If we define $\vec{l}\equiv\vec{\Delta}_1\times\vec{\Delta}_2$, the triad $(\vec{\Delta}_1,\vec{\Delta}_2,\vec{l})$ forms an orthonormal frame at each point of the medium.
+Since any orthonormal frame can be obtained from a standard orthonormal frame $(\vec{e}_1,\vec{e}_2,\vec{e}_3)$ by an application of a three-dimensional rotation matrix.
 Thus, the order parameter is $S^2\times\text{SO(3)}$.
 
-For simplicity, we ingore the variation of $\hat{d}$. 
+For simplicity, we ingore the variation of $\hat{d}$.
 So the order parameter has the form:
 \begin{align}
     A_i=\Delta_0\left(\hat{\Delta}_1+\hat{\Delta}_2\right)_i.
 \end{align}
-The order parameter have defined a map $\psi:X\to\text{SO(3)}$. 
-$\psi$ is called the texture of $^3\text{He}$. 
+The order parameter have defined a map $\psi:X\to\text{SO(3)}$.
+$\psi$ is called the texture of $^3\text{He}$.
 The relevant homotopy groups for classifying defects in superfluid $^3\text{He-A}$ are $\pi_n(\text{SO(3)})$.
 
 \subsubsection{Line Defects and Non-singular Vortices in \texorpdfstring{$^3\text{He-A}$}{}}
 From the fact $\text{SO(3)}\cong\mathbb{R}P^3$, we have $\pi_1(\text{SO(3)})\cong\pi_1(\mathbb{R}P^3)\cong\mathbb{Z}_2\cong\{0,1\}$.
 
-Textures which belong to class 0 can be continuously deformed into the uniform configuration. 
+Textures which belong to class 0 can be continuously deformed into the uniform configuration.
 Configurations in class 1 are called \textbf{disgyrations}.
 
 \subsubsection{Shankar monopole in \texorpdfstring{$^3\text{He-A}$}{}}
@@ -286,12 +384,13 @@ Shankar proposed a texture:
 where
 \begin{align}
     f(\vec{r})=\begin{cases}
-        2\pi & r=0\\\\
+        2\pi & r=0       \\\\
         0    & r=\infty.
     \end{cases}
 \end{align}
 This texture is called \textbf{Shankar monopole}.
 
+\clearpage
 \section{Manifolds}
 \subsection{Manifolds}
 \subsection{The Calculus on Manifolds}
@@ -321,7 +420,7 @@ Any orientable manifold admits two inequivalent orientations.
 \subsubsection{Integration of Forms}
 If there is a function $f$ on manifold $M$, we first define the integration of an $m$-form $f\omega$ on a chart by
 \begin{align}
-    \int_{U_i}f\omega\equiv\int_{\phi(U_i)}f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\dd{x^1} \dd{x^2}\dots \dd{x^m}
+    \int_{U_i}f\omega\equiv\int_{\phi(U_i)}f\left(\phi_{i}^{-1}(x)\right)h\left(\phi_{i}^{-1}(x)\right)\dd{x^1} \dd{x^2}\dots \dd{x^m}.
 \end{align}
 \begin{definition}
     Take an open covering $\{U_i\}$ of $M$ such that each point of $M$ is covered with a finite number of $U_i$.
@@ -365,19 +464,19 @@ Now, we can define the integral of $f$ on the entire $M$ by
 \subsection{Lie Groups and Lie Algebras}
 \subsection{The Action of Lie Groups on Manifolds}
 
-
+\clearpage
 \section{de Rham Cohomology Groups}
-\subsection{Stokes’ Theorem}
+\subsection{Stokes' Theorem}
 \subsection{de Rham Cohomology Groups}
-\subsection{Poincar{\'e}’s lemma}
+\subsection{Poincar{\'e}'s lemma}
 \subsection{Structure of de Rham Cohomology Groups}
 
-
+\clearpage
 \section{Riemannian Geometry}
 \subsection{Riemannian Manifolds and Pseudo-Riemannian Manifolds}
 \subsubsection{Metric Tensors}
 
-\begin{definition}
+\begin{definition}[Riemannian metric]
     Let $M$ be a differentiable manifold.
     A \textbf{Riemannian metric} $g$ on $M$ is a type $(0, 2)$ tensor field on $M$ which satisfies the following axioms at each point $p \in M$:
     \begin{enumerate}
@@ -459,10 +558,10 @@ where $f^\alpha$ denote the coordinates of $f(x)$.
 \subsection{Parallel Transport, Connection and Covariant Derivative}
 \subsubsection{Heuristic Introduction}
 We want to compare vectors defined on different points on the manifold.
-
-Before we compare two vectors defined at different points, we have to "move" a vector defined at one place to another without "changing" it (\textbf{parallel transport}).
+\begin{intu}
+    Before we compare two vectors defined at different points, we have to "move" a vector defined at one place to another without "changing" it (\textbf{parallel transport}).
 So it's necessary to specify the rules of the parallel transport, which requires an extra structure called \textbf{connection}.
-
+\end{intu}
 Let $\widetilde{V} \vert_{x+\Delta x}$ denote a vector $V|_{x}$ parallel transported $x+\Delta x$.
 Heuristically, We demand that the components satisfy
 \begin{align}
@@ -482,7 +581,7 @@ Levi-Civita connection satisfies
     \item the norm of a vector is invariant under parallel transport.
 \end{enumerate}
 \subsubsection{Affine Connections}
-\begin{definition}
+\begin{definition}[Affine connection]
     An \textbf{affine connection} $\nabla$ is a map $\nabla: \chi(M)\times\chi(M)\to\chi(M)$, or $(X,Y)\mapsto\nabla_X Y$ which satisfies the following conditions:
     \begin{align}
         \nabla_X(Y+Z)   & =\nabla_X Y+\nabla_X Z  \\
@@ -508,13 +607,120 @@ We can see that the components of $\nabla_VW$ do not depend on the derivative of
 \subsubsection{Parallel Transport and Geodesics}
 
 \subsection{Curvature and Torsion}
+\subsubsection{Definitions}
+\begin{definition}[Torsion tensor]
+    The \textbf{torsion tensor} is a map $T:\chi(M)\otimes\chi(M)\to\chi(M)$ such that
+    \begin{align}
+        T(X,Y)\equiv\nabla_X Y-\nabla_Y X-\comm{X}{Y}
+    \end{align}
+\end{definition}
+\begin{definition}[Riemann curvature tensor (Riemann tensor)]
+    The \textbf{Riemann curvature tensor} (or \textbf{Riemann tensor}) is a map $R:\chi(M)\otimes\chi(M)\otimes\chi(M)\to\chi(M)$ such that
+    \begin{align}
+        R(X,Y,Z)\equiv\nabla_X\nabla_Y Z-\nabla_Y\nabla_X Z-\nabla_{\comm{X}{Y}}Z.
+    \end{align}
+\end{definition}
+\subsubsection{Geometrical Meaning of The Riemann Tensor and The Torsion Tensor}
+\subsubsection{The Ricci Tensor and The Scalar Curvature}
+\begin{definition}[Ricci tensor]
+    The \textbf{Ricci tensor} $Ric$ is a type $(0,2)$ tensor defined by 
+    \begin{align}
+        Ric(X,Y)\equiv\expval{\dd{x^\mu},R(e_\mu,Y)X}
+    \end{align} 
+    whose component is 
+    \begin{align}
+        Ric_{\mu\nu}=Ric(e_\mu,e_\nu)=\tensor{R}{^\lambda_\mu_\lambda_\nu}.
+    \end{align}
+\end{definition}
+
+\begin{definition}[Scalar curvature]
+    The \textbf{scalar curvature} $\mathcal{R}$ is obtained by further contracting indices,
+    \begin{align}
+        \mathcal{R}\equiv g^{\mu\nu}Ric(e_\mu,e_\nu)=g^{\mu\nu}Ric_{\mu\nu}
+    \end{align}
+\end{definition}
 \subsection{Levi-Civita Connections}
+\subsubsection{The Fundamental Theorem}
+\begin{theorem}[The fundamental theorem of (pseudo-)Riemannian geometry]
+    On a (pseudo-)Riemannian manifold $(M,g)$, there exists a unique symmetric connection which is compatible with the metric $g$. 
+    This connection is called the \textbf{Levi-Civita connection}.
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
+\subsubsection{The Levi-Civita Connection in The Classical Geometry of Surfaces}
+\subsubsection{Geodesics}
+\subsubsection{The Normal Coordinate System}
+\subsubsection{Riemann Curvature Tensor with Levi-Civita Connection}
+\begin{theorem}[Bianchi identities]
+    Let $R$ be the Riemann tensor defined with respect to the Levi-Civita connection. 
+    Then $R$ satisfies the following identities:
+    \begin{enumerate}
+        \item The \textbf{first Bianchi identity}
+        \begin{align}
+            R(X,Y)Z+R(Z,X)Y+R(Y,Z)X=0.
+        \end{align}
+        \item The \textbf{second Bianchi identity}
+        \begin{align}
+            (\nabla_X R)(Y,Z)V+(\nabla_Z R)(X,Y)V+(\nabla_Y R)(Z,X)V=0.
+        \end{align}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    to be added
+\end{proof}
 \subsection{Holonomy}
+\begin{definition}[Holonomy group]
+    Let $p$ be a point in $(M,g)$ and consider the set of closed loops at $p$, $\{c(t)|0\leq t\leq1,c(0)=c(1)=p\}$.
+    Take a vector $X\in T_p M$ and parallel transport $X$ along a curve $c(t)$.
+    After a trip along $c(t)$, we end up with a new vector $X_c\in T_p M$.
+    Thus, the loop $c(t)$ and the connection $\nabla$ induce a linear transformation
+    \begin{align}
+        P_c:T_p M\to T_p M.
+    \end{align}
+    The set of these transformations is denoted by $H(p)$ and is called the \textbf{holonomy group} at $p$.
+\end{definition}
 \subsection{Isometries and Conformal Transformations}
 \subsection{Killing Vector Fields and Conformal Killing Vector Fields}
 \subsection{Non-coordinate Bases}
 \subsection{Differential Forms and Hodge Theory}
 \subsection{Aspects of General Relativity}
+\subsubsection{Introduction to General Relativity}
+Einstein proposed the following principles to construct the general theory of relativity
+\begin{enumerate}
+    \item \textbf{Principle of General Relativity}: All laws in physics take the same forms in any coordinate system.
+    \item \textbf{Principle of Equivalence}: There exists a coordinate system in which the effect of a gravitational field vanishes locally.
+\end{enumerate}
+
+Any theory of gravity must reduce to Newton's theory of gravity in the weak-field limit. 
+In Newton's theory, the gravitational potential $\Phi$ satisfies the Poisson equation
+\begin{align}\label{nequation}
+    \Delta_\phi=4\pi G\rho,
+\end{align}
+where $\rho$ is the mass density and $\Delta$ is the Laplace operator.
+
+In general relativity, the gravitational potential is replaced by the components of the metric tensor.
+Then, instead of the LHS of \cref{nequation}, we have the \textbf{Einstein tensor} defined by
+\begin{align}
+    G_{\mu\nu}\equiv Ric_{\mu\nu}-\frac{1}{2}g_{\mu\nu}\mathcal{R}
+\end{align}
+Similarly, the mass density is replaced by a more general object called the \textbf{energy-momentum tensor} $T_{\mu\nu}$.
+\lec{Einstein equation}{}And the \textbf{Einstein equation} is \sidenote{The constant $8\pi G$ is chosen so that \cref{einsteinequation} reproduces the Newtonian result in the weak-field limit.}
+\begin{align}\label{einsteinequation}
+    G_{\mu\nu}=8\pi GT_{\mu\nu}.
+\end{align}
+\begin{remark}
+    The tensor $T_{\mu\nu}$ is obtained from the matter action by the variational principle.
+    From Noether's theorem, $T_{\mu\nu}$ must satisfy a conservation equation of the form $\nabla_{\mu}T^{\mu\nu}=0$.
+\end{remark}
+
+\subsubsection{Einstein-Hilbert Action}
+We define the \textbf{Einstein-Hilbert action} by 
+\begin{align}
+    S_{\text{EH}}\equiv\frac{1}{16\pi G}\int\mathcal{R}\sqrt{-g}\dd[4]{x}.
+\end{align}
+
+
 \subsection{Bosonic String Theory}
 
 

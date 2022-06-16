@@ -223,12 +223,35 @@
 
 \theoremstyle{claim}
 \newtheorem{intu}{Intuition}
+\tcolorboxenvironment{intu}{
+    boxrule=0pt,
+    boxsep=0pt,
+    blanker,
+    borderline west={1pt}{0pt}{Magenta},
+    before skip=10pt,
+    after skip=10pt,
+    left=5pt,
+    right=5pt,
+    breakable, 
+}
 
 \theoremstyle{claim}
 \newtheorem{solu}{Solution}
 
 \theoremstyle{claim}
 \newtheorem{remark}{Remark}
+\tcolorboxenvironment{remark}{
+    boxrule=0pt,
+    boxsep=0pt,
+    blanker,
+    borderline west={1pt}{0pt}{Green},
+    before skip=10pt,
+    after skip=10pt,
+    left=5pt,
+    right=5pt,
+    breakable, 
+}
+
 
 \theoremstyle{claim}
 \newtheorem{example}{Example}
@@ -244,6 +267,23 @@
   right=5pt,
   breakable,
 }
+
+
+\theoremstyle{claim}
+\newtheorem{property}{Property}
+\tcolorboxenvironment{property}{
+  boxrule=0pt,
+  boxsep=0pt,
+  blanker,
+  borderline west={1pt}{0pt}{Purple},
+  sharp corners,
+  before skip=10pt,
+  after skip=10pt,
+  left=5pt,
+  right=5pt,
+  breakable,
+}
+
 
 \renewcommand*{\raggedleftmarginnote}{\noindent}
 \renewcommand*{\raggedrightmarginnote}{\noindent}
