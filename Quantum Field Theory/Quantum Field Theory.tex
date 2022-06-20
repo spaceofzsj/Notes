@@ -1,20 +1,72 @@
 \documentclass[10pt]{article}
 \usepackage{NotesTeXV3}
+\usepackage{orcidlink}
+\usepackage{tensor}
+\usepackage{cleveref}
+\usepackage{slashed}
+\usepackage[export]{adjustbox}
+\usepackage{silence}
+
+\WarningFilter{latex}{Marginpar on page}
+
+\hbadness=99999
+
+\let\oldsection\section
+\def\section{%
+  \setcounter{sidenote}{1}%
+  \oldsection
+}
 
 \begin{document}
 \title{Quantum Field Theory}
-\author{Shangjie Zhou}
-\affiliation{School of Physics and Technology, Wuhan University, Wuhan, 430072, China}
+\subheader{Notes}
+\author{Shangjie Zhou\orcidlink{0000-0001-9576-5011}}
+\affiliation{School of Physics and Technology, Wuhan University}
 \emailAdd{sjzhou@whu.edu.cn}
+\abstract{\textit{Last updated on: \today}\\\url{https://github.com/spaceofzsj/notes}}
 
 \maketitle
 
 
 \section{Introduction}
 
+\part{Foundations}
+
+\section{Symmetries and Particles}
+\subsection{Lorentz Group}
+
+\section{Quantum Fields}
+
+\section{Path Integral Quantization}
+
+\section{Perturbative Quantum Field Theory}
+
+\section{Quantum Electrodynamics}
 
 
-\newpage
+\part{Renormalization}
+
+\section{Systematics of Renormalization}
+
+\section{The Renormalization Group}
+
+\part{Standard Model}
+\section{Non-Abelian Gauge Invariance}
+\section{Quantization of Non-Abelian Gauge Theories}
+\section{Quantum Chromodynamics}
+
+\part{Topics}
+\section{Effective Field Theory}
+
+\section{Supersymmetry}
+
+\section{Quantization of Gravity}
+
+\appendix
+\section{Conventions}
+
+
+\clearpage
 \bibliographystyle{jhep}
 \bibliography{ref}
 \end{document}
